@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ChatBubbleContent } from './ChatBubbleContent.jsx';
 
 const DAYS = [
   'Domenica',
@@ -222,7 +223,7 @@ export default function App() {
     {
       role: 'bot',
       text:
-        "🌟 Benvenuto in AI ANGEL! Sono il tuo assistente spirituale. Posso guidarti nel mondo degli angeli, degli arcangeli, delle meditazioni e della crescita spirituale.\n\nCome posso illuminare il tuo cammino oggi?",
+        '## Benvenuto ✦\n\nSono **AI ANGEL**, il tuo assistente spirituale. Posso accompagnarti tra **angeli**, **arcangeli**, **meditazioni** e **crescita interiore**.\n\n- Rispondo in **italiano** di default, e nella **lingua** in cui mi scrivi.\n- Uso formattazione chiara (titoli, elenchi) per guidarti passo passo.\n\n*Come posso illuminare il tuo cammino oggi?*',
       time: 'Adesso',
     },
   ]);
@@ -871,9 +872,7 @@ export default function App() {
                 </div>
               ) : null}
               <div className="msg-body">
-                <div className="msg-bubble" style={{ whiteSpace: 'pre-wrap' }}>
-                  {msg.text}
-                </div>
+                <ChatBubbleContent role={msg.role} text={msg.text} />
                 <div className="msg-time">{msg.time}</div>
               </div>
               {msg.role === 'user' ? (
