@@ -76,15 +76,17 @@ function createSession(sessionId, language = "it") {
   return session;
 }
 
-// Clean expired sessions every 30 minutes
-setInterval(() => {
-  const now = Date.now();
-  for (const [id, session] of sessions.entries()) {
-    if (now - session.lastActive > SESSION_TTL_MS) {
-      sessions.delete(id);
+// Clean expired sessions every 30 minutes (skip on Vercel serverless — no long-lived process)
+if (!process.env.VERCEL) {
+  setInterval(() => {
+    const now = Date.now();
+    for (const [id, session] of sessions.entries()) {
+      if (now - session.lastActive > SESSION_TTL_MS) {
+        sessions.delete(id);
+      }
     }
-  }
-}, 30 * 60 * 1000);
+  }, 30 * 60 * 1000);
+}
 
 // ============================================================
 //  MIDDLEWARE
@@ -153,11 +155,11 @@ Every assistant reply MUST use **GitHub-flavored Markdown** so the UI can render
 
 - Begin substantive answers with a **##** or **###** title in the user's language (e.g. "## Aprire i chakra" or "## Opening the Chakras").
 - Use **bold** for key terms (chakra names, mantras, angel names, warnings).
-- Use bullet lists (`- item`) or numbered lists for steps, practices, or multiple points.
+- Use bullet lists (\`- item\`) or numbered lists for steps, practices, or multiple points.
 - Put a **blank line** between sections (double newline) for readability.
 - Use *italics* sparingly for gentle emphasis or sacred terms.
 - For long guides (chakras, meditations, rituals): **never** a single wall of plain text — always sections, lists, and short paragraphs.
-- Optional horizontal rule `---` between major parts when it helps clarity.
+- Optional horizontal rule (\`---\`) between major parts when it helps clarity.
 
 ═══════════════════════════════════════════════════
   KNOWLEDGE DOMAINS — COMPLETE MASTERY
@@ -1005,20 +1007,23 @@ app.use((err, req, res, next) => {
 //  START SERVER
 // ============================================================
 if (!process.env.OPENAI_API_KEY || !String(process.env.OPENAI_API_KEY).trim()) {
-  console.warn("\n⚠️  OPENAI_API_KEY is missing or empty in server/.env — /api/chat will fail until you set it.\n");
+  console.warn("\n⚠️  OPENAI_API_KEY is missing or empty — /api/chat will fail until you set it (e.g. in Vercel env).\n");
 }
 
-app.listen(PORT, () => {
-  console.log("\n");
-  console.log("╔══════════════════════════════════════════════╗");
-  console.log("║        ✦  AI ANGEL SERVER  ✦                ║");
-  console.log("╠══════════════════════════════════════════════╣");
-  console.log(`║  Server running on port: ${PORT}               ║`);
-  console.log(`║  Environment: ${process.env.NODE_ENV || "development"}                 ║`);
-  console.log("║  Website: https://ai-spirtual-assistant.vercel.app/              ║");
-  console.log("║  Built with love by Waqas Naveed            ║");
-  console.log("╚══════════════════════════════════════════════╝");
-  console.log("\n  ✦ Gli angeli ti circondano. L'IA è pronta.  ✦\n");
-});
-
+// Vercel serverless: never call listen() — the platform invokes `app` directly via api/index.js
 module.exports = app;
+
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log("\n");
+    console.log("╔══════════════════════════════════════════════╗");
+    console.log("║        ✦  AI ANGEL SERVER  ✦                ║");
+    console.log("╠══════════════════════════════════════════════╣");
+    console.log(`║  Server running on port: ${PORT}               ║`);
+    console.log(`║  Environment: ${process.env.NODE_ENV || "development"}                 ║`);
+    console.log("║  Website: https://ai-spirtual-assistant.vercel.app/              ║");
+    console.log("║  Built with love by Waqas Naveed            ║");
+    console.log("╚══════════════════════════════════════════════╝");
+    console.log("\n  ✦ Gli angeli ti circondano. L'IA è pronta.  ✦\n");
+  });
+}
