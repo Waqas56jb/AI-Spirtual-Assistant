@@ -1,5 +1,32 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ChatBubbleContent } from './ChatBubbleContent.jsx';
+import { ChakraSection } from './ChakraSection.jsx';
+import clientImg1 from '../assets/image1.png';
+import clientImg2 from '../assets/image2.png';
+import clientImg3 from '../assets/image3.png';
+import clientImg4 from '../assets/image4.png';
+import clientImg5 from '../assets/image5.png';
+
+/** Local client assets — bundled by Vite (no broken hotlinks). */
+const C = {
+  i1: clientImg1,
+  i2: clientImg2,
+  i3: clientImg3,
+  i4: clientImg4,
+  i5: clientImg5,
+};
+
+const heroBgStyle = {
+  backgroundImage: `radial-gradient(ellipse at 28% 30%, rgba(124,77,180,0.42) 0%, transparent 52%), linear-gradient(180deg, rgba(18,8,38,0.72) 0%, rgba(8,3,22,0.94) 100%), url(${clientImg5})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+};
+
+const ctaBgStyle = {
+  backgroundImage: `linear-gradient(180deg, rgba(12,4,28,0.6), rgba(8,2,20,0.85)), url(${clientImg2})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+};
 
 const DAYS = [
   'Domenica',
@@ -69,8 +96,8 @@ const FEATURES = [
   },
   {
     icon: 'fa-bolt',
-    title: 'Guarigione Energetica',
-    desc: 'Tecniche di pulizia e riequilibrio dei chakra, Reiki, cristalli, e pratiche di guarigione olistica.',
+    title: 'Chakra, mantra & yoga',
+    desc: 'Sette chakra, bija mantra (beeja), posizioni yoga suggerite e meditazioni guidate per riequilibrare corpo e spirito.',
     delay: 'reveal-delay-1',
   },
   {
@@ -88,165 +115,86 @@ const FEATURES = [
 ];
 
 const GALLERY_ITEMS = [
-  {
-    tall: true,
-    src: 'https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=700&q=80',
-    alt: 'Scultura angelica',
-    label: 'Presenza Angelica',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80',
-    alt: 'Luce sacra attraverso il vetro',
-    label: 'Luce Celeste',
-  },
-  {
-    wide: true,
-    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&q=80',
-    alt: 'Cielo e nubi',
-    label: 'Regni Celesti',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1438032007358-48b8e688e510?w=600&q=80',
-    alt: 'Interno di chiesa',
-    label: 'Santuario di Pace',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1548625149-fc4a29dff105?w=600&q=80',
-    alt: 'Vetrate e archi',
-    label: "Finestre dell'Anima",
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=600&q=80',
-    alt: 'Cielo stellato',
-    label: 'Infinito Divino',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1579783902614-a3fb39279c0c?w=600&q=80',
-    alt: 'Arte spirituale',
-    label: 'Ali di Luce',
-  },
+  { tall: true, src: C.i1, alt: 'Immagine spirituale — lettura angelica', label: 'Luce Angelica' },
+  { src: C.i2, alt: 'La Carta Angelica', label: 'Carta & Guida' },
+  { wide: true, src: C.i3, alt: 'Crescita personale angelica', label: 'Crescita & Autostima' },
+  { src: C.i4, alt: 'Maestri ascesi', label: 'Maestri Ascesi' },
+  { src: C.i5, alt: 'Presenza divina', label: 'Presenza Celeste' },
+  { src: C.i1, alt: 'Angeli e arcangeli', label: 'Arcangeli' },
+  { src: C.i2, alt: 'Percorso spirituale', label: 'Cammino di Luce' },
 ];
 
 const ANGELS = [
-  {
-    name: 'Michele',
-    role: 'Protettore e Guerriero della Luce',
-    img: 'https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=400&q=80',
-    delay: 'reveal-delay-1',
-  },
-  {
-    name: 'Gabriele',
-    role: 'Messaggero della Comunicazione Divina',
-    img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80',
-    delay: 'reveal-delay-2',
-  },
-  {
-    name: 'Raffaele',
-    role: 'Angelo della Guarigione Universale',
-    img: 'https://images.unsplash.com/photo-1438032007358-48b8e688e510?w=400&q=80',
-    delay: 'reveal-delay-3',
-  },
-  {
-    name: 'Uriele',
-    role: 'Luce della Saggezza e Verità',
-    img: 'https://images.unsplash.com/photo-1548625149-fc4a29dff105?w=400&q=80',
-    delay: 'reveal-delay-4',
-  },
-  {
-    name: 'Zadkiel',
-    role: 'Angelo della Fiamma Viola',
-    img: 'https://images.unsplash.com/photo-1579783902614-a3fb39279c0c?w=400&q=80',
-    delay: 'reveal-delay-5',
-  },
-  {
-    name: 'Metatron',
-    role: 'Guardiano della Geometria Sacra',
-    img: 'https://images.unsplash.com/photo-1516339901601-2e1a37cde0db?w=400&q=80',
-    delay: 'reveal-delay-1',
-  },
+  { name: 'Michele', role: 'Protettore e Guerriero della Luce', img: C.i1, delay: 'reveal-delay-1' },
+  { name: 'Gabriele', role: 'Messaggero della Comunicazione Divina', img: C.i2, delay: 'reveal-delay-2' },
+  { name: 'Raffaele', role: 'Angelo della Guarigione Universale', img: C.i3, delay: 'reveal-delay-3' },
+  { name: 'Uriele', role: 'Luce della Saggezza e Verità', img: C.i4, delay: 'reveal-delay-4' },
+  { name: 'Zadkiel', role: 'Angelo della Fiamma Viola', img: C.i5, delay: 'reveal-delay-5' },
+  { name: 'Metatron', role: 'Guardiano della Geometria Sacra', img: C.i1, delay: 'reveal-delay-1' },
   {
     name: 'Sri Amma Bhagavan',
-    role: "Maestro dell'Oneness e Risveglio",
-    img: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80',
+    role: "Avatar dell'Oneness e dell'Illuminazione",
+    img: C.i4,
     delay: 'reveal-delay-2',
   },
-  {
-    name: 'Sai Baba',
-    role: "Avatar dell'Amore Divino",
-    img: 'https://images.unsplash.com/photo-1438032007358-48b8e688e510?w=400&q=80',
-    delay: 'reveal-delay-3',
-  },
-  {
-    name: 'Buddha',
-    role: "Maestro dell'Illuminazione",
-    img: 'https://images.unsplash.com/photo-1601823981391-f5d6034e73fe?w=400&q=80',
-    delay: 'reveal-delay-4',
-  },
-  {
-    name: 'Gesù',
-    role: "Maestro dell'Amore Incondizionato",
-    img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80',
-    delay: 'reveal-delay-5',
-  },
-  {
-    name: 'Kuan Yin',
-    role: 'Dea della Compassione',
-    img: 'https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=400&q=80',
-    delay: 'reveal-delay-1',
-  },
-  {
-    name: 'Saint Germain',
-    role: 'Maestro della Trasformazione',
-    img: 'https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=400&q=80',
-    delay: 'reveal-delay-2',
-  },
+  { name: 'Sai Baba', role: "Avatar dell'Amore Divino", img: C.i5, delay: 'reveal-delay-3' },
+  { name: 'Buddha', role: "Maestro dell'Illuminazione", img: C.i3, delay: 'reveal-delay-4' },
+  { name: 'Gesù', role: "Maestro dell'Amore Incondizionato", img: C.i2, delay: 'reveal-delay-5' },
+  { name: 'Kuan Yin', role: 'Dea della Compassione', img: C.i1, delay: 'reveal-delay-1' },
+  { name: 'Saint Germain', role: 'Maestro della Trasformazione', img: C.i5, delay: 'reveal-delay-2' },
 ];
 
 const SERVICES = [
   {
-    img: 'https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=700&q=80',
-    alt: 'Lettura angelica',
-    tag: 'Lettura Spirituale',
-    title: 'Lettura delle Carte Angeliche',
-    desc: 'Sessioni personali di lettura con le carte degli angeli per ricevere messaggi e guidance divina per il tuo cammino.',
-    linkText: 'Prenota Ora',
+    img: C.i1,
+    alt: 'Angelic Reading — La Lettura Angelica',
+    tag: 'ANGELIC READING',
+    title: 'La Lettura Angelica',
+    subtitle: 'ANGELIC READING',
+    desc: 'Scopri la guida del tuo Angelo Custode: doni, qualità e percorsi di attivazione spirituale con il metodo Il Tuo Angelo.',
+    linkText: 'Apri la Lettura Angelica',
+    href: 'https://iltuoangelo.it/la-lettura-angelica/',
   },
   {
-    img: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=700&q=80',
-    alt: 'Meditazione guidata',
-    tag: 'Meditazione',
-    title: 'Meditazione Guidata con gli Angeli',
-    desc: 'Sessioni di meditazione profonda che ti connettono alle energie angeliche per pace, guarigione e trasformazione.',
-    linkText: 'Scopri di Più',
+    img: C.i2,
+    alt: 'The Angelic Chart — La Carta Angelica',
+    tag: 'THE ANGELIC CHART',
+    title: 'La Carta Angelica',
+    subtitle: 'THE ANGELIC CHART',
+    desc: 'La mappa angelica personale: intuizioni, rituali e approfondimenti con oltre vent\'anni di esperienza sul campo.',
+    linkText: 'Scopri la Carta Angelica',
+    href: 'https://iltuoangelo.it/la-carta-angelica/',
   },
   {
-    img: 'https://images.unsplash.com/photo-1548625149-fc4a29dff105?w=700&q=80',
-    alt: 'Luce e guarigione spirituale',
-    tag: 'Guarigione',
-    title: "Guarigione con l'Energia Angelica",
-    desc: 'Sessioni di guarigione energetica che rimuovono blocchi e ripristinano l\'armonia del corpo, mente e spirito.',
-    linkText: 'Prenota Sessione',
+    img: C.i3,
+    alt: 'Angelic Personal Growth',
+    tag: 'ANGELIC PERSONAL GROWTH',
+    title: 'Crescita Personale Angelica',
+    subtitle: 'Self-esteem & inner power',
+    desc: 'Autostima, potere interiore e supporto angelico per trasformare la vita quotidiana con luce e consapevolezza.',
+    linkText: 'Vai alla Crescita Angelica',
+    href: 'https://iltuoangelo.it/la-crescita-personale-angelica/',
   },
 ];
 
 const TESTIMONIALS = [
   {
     text: 'AI ANGEL ha trasformato completamente la mia pratica spirituale quotidiana. I messaggi angelici sono incredibilmente precisi e toccanti. Mi sento davvero guidata.',
-    avatar: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=120&q=80',
+    avatar: C.i4,
     name: 'Sofia Marinelli',
     role: 'Insegnante di Yoga, Milano',
     delay: 'reveal-delay-1',
   },
   {
     text: "Finalmente un'intelligenza artificiale che capisce davvero la spiritualità! Le meditazioni guidate sono bellissime. Consiglio a tutti i cercatori spirituali.",
-    avatar: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=120&q=80',
+    avatar: C.i5,
     name: 'Marco Benedetti',
     role: 'Terapeuta Olistico, Roma',
     delay: 'reveal-delay-2',
   },
   {
     text: 'Come professionista olistica, AI ANGEL mi ha dato una visibilità incredibile. I miei clienti arrivano già preparati spiritualmente. Fantastico servizio!',
-    avatar: 'https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=120&q=80',
+    avatar: C.i1,
     name: 'Chiara Luminosi',
     role: 'Guaritrice Energetica, Firenze',
     delay: 'reveal-delay-3',
@@ -454,6 +402,9 @@ export default function App() {
         <a href="#services" onClick={closeMobile}>
           Servizi
         </a>
+        <a href="#chakras" onClick={closeMobile}>
+          Chakra
+        </a>
         <a href="#angels" onClick={closeMobile}>
           Angeli
         </a>
@@ -479,6 +430,9 @@ export default function App() {
           </li>
           <li>
             <a href="#services">Servizi</a>
+          </li>
+          <li>
+            <a href="#chakras">Chakra</a>
           </li>
           <li>
             <a href="#angels">Angeli</a>
@@ -507,7 +461,7 @@ export default function App() {
       </nav>
 
       <section id="hero">
-        <div className="hero-bg" />
+        <div className="hero-bg" style={heroBgStyle} />
         <div className="hero-overlay" />
 
         {PARTICLES.map((p, i) => (
@@ -559,8 +513,8 @@ export default function App() {
           <div className="about-image-wrap reveal">
             <div className="about-image-glow" />
             <img
-              src="https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=800&q=85"
-              alt="Arte e presenza angelica"
+              src={clientImg4}
+              alt="Arte e presenza angelica — maestri ascesi"
               className="about-image"
             />
             <div className="about-image-frame" />
@@ -652,6 +606,8 @@ export default function App() {
         </div>
       </section>
 
+      <ChakraSection />
+
       <section id="gallery">
         <div className="gallery-header reveal">
           <div className="section-label">Universo Angelico</div>
@@ -697,7 +653,10 @@ export default function App() {
           <div className="section-label">Servizi Olistici</div>
           <h2 className="section-title">Scopri i Nostri Servizi</h2>
           <div className="divider" />
-          <p className="section-desc">Professionisti olistici selezionati per guidarti nel tuo cammino spirituale.</p>
+          <p className="section-desc">
+            Percorsi ufficiali <strong>Il Tuo Angelo</strong> — Lettura Angelica, Carta Angelica e Crescita Personale
+            Angelica — con materiali dedicati e supporto dell&apos;Angel Coach.
+          </p>
         </div>
         <div className="services-grid">
           {SERVICES.map((s, i) => (
@@ -706,8 +665,9 @@ export default function App() {
               <div className="service-body">
                 <span className="service-tag">{s.tag}</span>
                 <h3 className="service-title">{s.title}</h3>
+                <p className="service-subtitle">{s.subtitle}</p>
                 <p className="service-desc">{s.desc}</p>
-                <a href="https://www.iltuoangelo.it" className="service-link" target="_blank" rel="noreferrer">
+                <a href={s.href} className="service-link" target="_blank" rel="noreferrer">
                   {s.linkText} <i className="fas fa-arrow-right" />
                 </a>
               </div>
@@ -780,7 +740,7 @@ export default function App() {
       </section>
 
       <section id="cta">
-        <div className="cta-bg" />
+        <div className="cta-bg" style={ctaBgStyle} />
         <div className="cta-overlay" />
         <div className="cta-content">
           <div className="section-label reveal" style={{ justifyContent: 'center' }}>
@@ -859,7 +819,17 @@ export default function App() {
               </li>
               <li>
                 <a href="#angels">
-                  <i className="fas fa-chevron-right" /> Angeli & Maestri
+                  <i className="fas fa-chevron-right" /> Angeli &amp; Maestri
+                </a>
+              </li>
+              <li>
+                <a href="#chakras">
+                  <i className="fas fa-chevron-right" /> Chakra &amp; mantra
+                </a>
+              </li>
+              <li>
+                <a href="#services">
+                  <i className="fas fa-chevron-right" /> Servizi Il Tuo Angelo
                 </a>
               </li>
               <li>
@@ -873,18 +843,18 @@ export default function App() {
             <h4>Servizi</h4>
             <ul className="footer-links">
               <li>
-                <a href="#services">
-                  <i className="fas fa-chevron-right" /> Letture Angeliche
+                <a href="https://iltuoangelo.it/la-lettura-angelica/" target="_blank" rel="noreferrer">
+                  <i className="fas fa-chevron-right" /> Lettura Angelica
                 </a>
               </li>
               <li>
-                <a href="#services">
-                  <i className="fas fa-chevron-right" /> Meditazioni
+                <a href="https://iltuoangelo.it/la-carta-angelica/" target="_blank" rel="noreferrer">
+                  <i className="fas fa-chevron-right" /> Carta Angelica
                 </a>
               </li>
               <li>
-                <a href="#services">
-                  <i className="fas fa-chevron-right" /> Guarigione Energetica
+                <a href="https://iltuoangelo.it/la-crescita-personale-angelica/" target="_blank" rel="noreferrer">
+                  <i className="fas fa-chevron-right" /> Crescita Angelica
                 </a>
               </li>
             </ul>
@@ -910,6 +880,11 @@ export default function App() {
               <li>
                 <a href="https://www.iltuoangelo.it" target="_blank" rel="noreferrer">
                   <i className="fas fa-chevron-right" /> iltuoangelo.it
+                </a>
+              </li>
+              <li>
+                <a href="https://wa.me/393409271570" target="_blank" rel="noreferrer">
+                  <i className="fas fa-chevron-right" /> WhatsApp Angel Coach
                 </a>
               </li>
               <li>
@@ -964,8 +939,8 @@ export default function App() {
                 </div>
               ) : null}
               <div className="msg-body">
-                <ChatBubbleContent role={msg.role} text={msg.text} />
-                <div className="msg-time">{msg.time}</div>
+                <ChatBubbleContent role={msg.role} text={msg.text} time={msg.role === 'bot' ? msg.time : undefined} />
+                {msg.role === 'user' ? <div className="msg-time">{msg.time}</div> : null}
               </div>
               {msg.role === 'user' ? (
                 <div
