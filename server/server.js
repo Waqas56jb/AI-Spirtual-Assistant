@@ -489,8 +489,8 @@ SACRAL (Svadhisthana) — Orange — D note — VAM — Creativity, sexuality, e
 SOLAR PLEXUS (Manipura) — Yellow — E note — RAM — Personal power, will, confidence, digestion
 HEART (Anahata) — Green/Pink — F note — YAM — Love, compassion, relationships, healing
 THROAT (Vishuddha) — Blue — G note — HAM — Communication, expression, truth, creativity
-THIRD EYE (Ajna) — Indigo — A note — OM/AUM — Intuition, clairvoyance, wisdom, insight
-CROWN (Sahasrara) — Violet/White — B note — Silent/AH — Divine connection, enlightenment, oneness
+THIRD EYE (Ajna) — Indigo — A note — AH AUM — Intuition, clairvoyance, wisdom, insight
+CROWN (Sahasrara) — Violet/White — B note — OGUM SATYAM AUM — Divine connection, enlightenment, oneness
 SOUL STAR (8th) — White/Gold — Cosmic connection, Akashic Records
 EARTH STAR (below feet) — Black/Brown — Grounding to Earth's core
 

@@ -1,32 +1,32 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ChatBubbleContent } from './ChatBubbleContent.jsx';
 import { ChakraSection } from './ChakraSection.jsx';
-import clientImg1 from '../assets/image1.png';
-import clientImg2 from '../assets/image2.png';
-import clientImg3 from '../assets/image3.png';
-import clientImg4 from '../assets/image4.png';
-import clientImg5 from '../assets/image5.png';
+import img1 from '../assets/image1.png';
+import img2 from '../assets/image2.png';
+import img3 from '../assets/image3.png';
+import img4 from '../assets/image4.png';
+import img5 from '../assets/image5.png';
+import img6 from '../assets/image6.png';
+import img7 from '../assets/image7.png';
+import img8 from '../assets/image8.png';
+import img9 from '../assets/image9.png';
+import img10 from '../assets/image10.png';
+import img11 from '../assets/image11.png';
+import img12 from '../assets/image12.png';
+import img13 from '../assets/image13.png';
+import img14 from '../assets/image14.png';
+import img15 from '../assets/image15.png';
+import img16 from '../assets/image16.png';
+import img17 from '../assets/image17.png';
+import img18 from '../assets/image18.png';
 
-/** Local client assets — bundled by Vite (no broken hotlinks). */
-const C = {
-  i1: clientImg1,
-  i2: clientImg2,
-  i3: clientImg3,
-  i4: clientImg4,
-  i5: clientImg5,
-};
+/** Servizi: mapping richiesto dal cliente (image1, image2, image4). */
+const servImgCrescita = img1;
+const servImgCarta = img2;
+const servImgLettura = img4;
 
-const heroBgStyle = {
-  backgroundImage: `radial-gradient(ellipse at 28% 30%, rgba(124,77,180,0.42) 0%, transparent 52%), linear-gradient(180deg, rgba(18,8,38,0.72) 0%, rgba(8,3,22,0.94) 100%), url(${clientImg5})`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-};
-
-const ctaBgStyle = {
-  backgroundImage: `linear-gradient(180deg, rgba(12,4,28,0.6), rgba(8,2,20,0.85)), url(${clientImg2})`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-};
+/** Asset cliente `image6` — sezione Chi siamo. `image5` è in galleria (ex sfondo CTA). */
+const ABOUT_IMAGE = img6;
 
 const DAYS = [
   'Domenica',
@@ -115,38 +115,69 @@ const FEATURES = [
 ];
 
 const GALLERY_ITEMS = [
-  { tall: true, src: C.i1, alt: 'Immagine spirituale — lettura angelica', label: 'Luce Angelica' },
-  { src: C.i2, alt: 'La Carta Angelica', label: 'Carta & Guida' },
-  { wide: true, src: C.i3, alt: 'Crescita personale angelica', label: 'Crescita & Autostima' },
-  { src: C.i4, alt: 'Maestri ascesi', label: 'Maestri Ascesi' },
-  { src: C.i5, alt: 'Presenza divina', label: 'Presenza Celeste' },
-  { src: C.i1, alt: 'Angeli e arcangeli', label: 'Arcangeli' },
-  { src: C.i2, alt: 'Percorso spirituale', label: 'Cammino di Luce' },
+  {
+    tall: true,
+    src: img3,
+    alt: 'Galleria spirituale — immagine 3',
+    label: 'Presenza angelica',
+  },
+  {
+    src: img7,
+    alt: 'Galleria spirituale — immagine 7',
+    label: 'Luce angelica',
+  },
+  {
+    wide: true,
+    src: img9,
+    alt: 'Galleria spirituale — immagine 9',
+    label: 'Sacro e bellezza',
+  },
+  {
+    src: img8,
+    alt: 'Galleria spirituale — immagine 8',
+    label: 'Presenza celeste',
+  },
+  {
+    src: img10,
+    alt: 'Galleria spirituale — immagine 10',
+    label: 'Armonia interiore',
+  },
+  {
+    src: img11,
+    alt: 'Galleria spirituale — immagine 11',
+    label: 'Guida divina',
+  },
+  {
+    src: img5,
+    alt: 'Galleria spirituale — immagine 5',
+    label: 'Luce interiore',
+  },
 ];
 
 const ANGELS = [
-  { name: 'Michele', role: 'Protettore e Guerriero della Luce', img: C.i1, delay: 'reveal-delay-1' },
-  { name: 'Gabriele', role: 'Messaggero della Comunicazione Divina', img: C.i2, delay: 'reveal-delay-2' },
-  { name: 'Raffaele', role: 'Angelo della Guarigione Universale', img: C.i3, delay: 'reveal-delay-3' },
-  { name: 'Uriele', role: 'Luce della Saggezza e Verità', img: C.i4, delay: 'reveal-delay-4' },
-  { name: 'Zadkiel', role: 'Angelo della Fiamma Viola', img: C.i5, delay: 'reveal-delay-5' },
-  { name: 'Metatron', role: 'Guardiano della Geometria Sacra', img: C.i1, delay: 'reveal-delay-1' },
-  {
-    name: 'Sri Amma Bhagavan',
-    role: "Avatar dell'Oneness e dell'Illuminazione",
-    img: C.i4,
-    delay: 'reveal-delay-2',
-  },
-  { name: 'Sai Baba', role: "Avatar dell'Amore Divino", img: C.i5, delay: 'reveal-delay-3' },
-  { name: 'Buddha', role: "Maestro dell'Illuminazione", img: C.i3, delay: 'reveal-delay-4' },
-  { name: 'Gesù', role: "Maestro dell'Amore Incondizionato", img: C.i2, delay: 'reveal-delay-5' },
-  { name: 'Kuan Yin', role: 'Dea della Compassione', img: C.i1, delay: 'reveal-delay-1' },
-  { name: 'Saint Germain', role: 'Maestro della Trasformazione', img: C.i5, delay: 'reveal-delay-2' },
+  { name: 'Michele', role: 'Protettore e Guerriero della Luce', img: img13, delay: 'reveal-delay-1' },
+  { name: 'Gabriele', role: 'Messaggero della Comunicazione Divina', img: img14, delay: 'reveal-delay-2' },
+  { name: 'Raffaele', role: 'Angelo della Guarigione Universale', img: img15, delay: 'reveal-delay-3' },
+  { name: 'Uriele', role: 'Luce della Saggezza e Verità', img: img16, delay: 'reveal-delay-4' },
+  { name: 'Zadkiel', role: 'Angelo della Fiamma Viola', img: img17, delay: 'reveal-delay-5' },
+  { name: 'Metatron', role: 'Guardiano della Geometria Sacra', img: img18, delay: 'reveal-delay-1' },
+  { name: 'Jophiel', role: 'Angelo della Bellezza e della Saggezza Divina', img: img12, delay: 'reveal-delay-2' },
+  { name: 'Altri Angeli', role: 'Tutta la schiera celeste di luce', icon: '✦', delay: 'reveal-delay-3' },
+];
+
+const MASTERS = [
+  { name: 'Sri Amma Bhagavan', role: 'Avatar dell\'Unità e dell\'Illuminazione', icon: '☼', delay: 'reveal-delay-1' },
+  { name: 'Sai Baba', role: 'Maestro dell\'Amore e del Servizio', icon: '☥', delay: 'reveal-delay-2' },
+  { name: 'Buddha', role: 'Risveglio, Compassione, Pace Interiore', icon: '☸', delay: 'reveal-delay-3' },
+  { name: 'Gesù', role: 'Maestro dell\'Amore e della Luce Cristica', icon: '✝', delay: 'reveal-delay-4' },
+  { name: 'Kuan Yin', role: 'Bodhisattva della Compassione Infinita', icon: '☾', delay: 'reveal-delay-5' },
+  { name: 'Saint Germain', role: 'Custode della Fiamma Viola della Trasmutazione', icon: '⚜', delay: 'reveal-delay-1' },
+  { name: 'Altri Maestri', role: 'Tutti i Maestri Ascesi della Luce', icon: '✧', delay: 'reveal-delay-2' },
 ];
 
 const SERVICES = [
   {
-    img: C.i1,
+    img: servImgLettura,
     alt: 'Angelic Reading — La Lettura Angelica',
     tag: 'ANGELIC READING',
     title: 'La Lettura Angelica',
@@ -156,7 +187,7 @@ const SERVICES = [
     href: 'https://iltuoangelo.it/la-lettura-angelica/',
   },
   {
-    img: C.i2,
+    img: servImgCarta,
     alt: 'The Angelic Chart — La Carta Angelica',
     tag: 'THE ANGELIC CHART',
     title: 'La Carta Angelica',
@@ -166,7 +197,7 @@ const SERVICES = [
     href: 'https://iltuoangelo.it/la-carta-angelica/',
   },
   {
-    img: C.i3,
+    img: servImgCrescita,
     alt: 'Angelic Personal Growth',
     tag: 'ANGELIC PERSONAL GROWTH',
     title: 'Crescita Personale Angelica',
@@ -180,21 +211,21 @@ const SERVICES = [
 const TESTIMONIALS = [
   {
     text: 'AI ANGEL ha trasformato completamente la mia pratica spirituale quotidiana. I messaggi angelici sono incredibilmente precisi e toccanti. Mi sento davvero guidata.',
-    avatar: C.i4,
+    initials: 'SM',
     name: 'Sofia Marinelli',
     role: 'Insegnante di Yoga, Milano',
     delay: 'reveal-delay-1',
   },
   {
     text: "Finalmente un'intelligenza artificiale che capisce davvero la spiritualità! Le meditazioni guidate sono bellissime. Consiglio a tutti i cercatori spirituali.",
-    avatar: C.i5,
+    initials: 'MB',
     name: 'Marco Benedetti',
     role: 'Terapeuta Olistico, Roma',
     delay: 'reveal-delay-2',
   },
   {
     text: 'Come professionista olistica, AI ANGEL mi ha dato una visibilità incredibile. I miei clienti arrivano già preparati spiritualmente. Fantastico servizio!',
-    avatar: C.i1,
+    initials: 'CL',
     name: 'Chiara Luminosi',
     role: 'Guaritrice Energetica, Firenze',
     delay: 'reveal-delay-3',
@@ -408,6 +439,9 @@ export default function App() {
         <a href="#angels" onClick={closeMobile}>
           Angeli
         </a>
+        <a href="#masters" onClick={closeMobile}>
+          Maestri
+        </a>
         <a href="#daily" onClick={closeMobile}>
           Messaggio
         </a>
@@ -418,7 +452,9 @@ export default function App() {
 
       <nav id="navbar" className={navScrolled ? 'scrolled' : ''}>
         <a href="#" className="nav-logo">
-          <div className="nav-logo-icon">✦</div>
+          <span className="nav-logo-icon" aria-hidden="true">
+            ✦
+          </span>
           <span className="nav-logo-text">AI ANGEL</span>
         </a>
         <ul className="nav-links">
@@ -436,6 +472,9 @@ export default function App() {
           </li>
           <li>
             <a href="#angels">Angeli</a>
+          </li>
+          <li>
+            <a href="#masters">Maestri</a>
           </li>
           <li>
             <a href="#daily">Messaggio</a>
@@ -461,9 +500,6 @@ export default function App() {
       </nav>
 
       <section id="hero">
-        <div className="hero-bg" style={heroBgStyle} />
-        <div className="hero-overlay" />
-
         {PARTICLES.map((p, i) => (
           <div
             key={i}
@@ -484,7 +520,13 @@ export default function App() {
             <i className="fas fa-star" />
             Il Tuo Assistente Spirituale Intelligente
           </div>
-          <h1 className="hero-title">AI ANGEL</h1>
+          <h1 className="hero-title">
+            AI ANGEL
+            <span className="visually-hidden">
+              {' '}
+              — assistente spirituale con angeli e maestri ascesi
+            </span>
+          </h1>
           <p className="hero-subtitle-line">Dove la Tecnologia incontra la Luce Divina</p>
           <p className="hero-desc">
             Un&apos;intelligenza artificiale spirituale dedicata agli Angeli, agli Arcangeli, ai Maestri Ascesi e alla
@@ -512,11 +554,7 @@ export default function App() {
         <div className="about-grid">
           <div className="about-image-wrap reveal">
             <div className="about-image-glow" />
-            <img
-              src={clientImg4}
-              alt="Arte e presenza angelica — maestri ascesi"
-              className="about-image"
-            />
+            <img src={ABOUT_IMAGE} alt="Immagine della missione AI ANGEL" className="about-image" />
             <div className="about-image-frame" />
           </div>
           <div className="reveal reveal-delay-2">
@@ -629,20 +667,48 @@ export default function App() {
       <section id="angels">
         <div className="angels-header reveal">
           <div className="section-label">Guida Celeste</div>
-          <h2 className="section-title">Gli Arcangeli & Maestri</h2>
+          <h2 className="section-title">Arcangeli della Luce</h2>
           <div className="divider" />
           <p className="section-desc">
-            Connettiti con le potenti energie angeliche e i Maestri Ascesi che guidano l&apos;umanità.
+            Connettiti con le energie degli arcangeli che guidano e proteggono. Nel chat puoi approfondire anche i
+            Maestri Ascesi e ogni tradizione spirituale.
           </p>
         </div>
         <div className="angels-scroll">
           {ANGELS.map((a) => (
             <div key={a.name} className={`angel-card reveal ${a.delay}`}>
-              <div className="angel-thumb-wrap">
-                <img className="angel-thumb" src={a.img} alt={a.name} loading="lazy" />
+              <div className={`angel-thumb-wrap${a.icon ? ' angel-thumb-wrap--icon' : ''}`}>
+                {a.img ? (
+                  <img className="angel-thumb" src={a.img} alt={a.name} loading="lazy" />
+                ) : (
+                  <span className="angel-thumb-icon" aria-hidden>{a.icon}</span>
+                )}
               </div>
               <div className="angel-name">{a.name}</div>
               <div className="angel-role">{a.role}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="masters">
+        <div className="masters-header reveal">
+          <div className="section-label">Maestri Ascesi</div>
+          <h2 className="section-title">Maestri di Luce</h2>
+          <div className="divider" />
+          <p className="section-desc">
+            La saggezza dei Maestri Ascesi: Sri Amma Bhagavan, Sai Baba, Buddha, Gesù, Kuan Yin e Saint Germain.
+            Guida, devozione e illuminazione per il tuo cammino.
+          </p>
+        </div>
+        <div className="angels-scroll masters-scroll">
+          {MASTERS.map((m) => (
+            <div key={m.name} className={`angel-card master-card reveal ${m.delay}`}>
+              <div className="angel-thumb-wrap angel-thumb-wrap--icon">
+                <span className="angel-thumb-icon" aria-hidden>{m.icon}</span>
+              </div>
+              <div className="angel-name">{m.name}</div>
+              <div className="angel-role">{m.role}</div>
             </div>
           ))}
         </div>
@@ -728,7 +794,9 @@ export default function App() {
               <div className="testimonial-quote">&quot;</div>
               <p className="testimonial-text">{t.text}</p>
               <div className="testimonial-author">
-                <img src={t.avatar} alt={t.name} className="testimonial-avatar" />
+                <div className="testimonial-avatar testimonial-avatar--initial" aria-hidden="true">
+                  {t.initials}
+                </div>
                 <div>
                   <div className="testimonial-name">{t.name}</div>
                   <div className="testimonial-role">{t.role}</div>
@@ -740,8 +808,6 @@ export default function App() {
       </section>
 
       <section id="cta">
-        <div className="cta-bg" style={ctaBgStyle} />
-        <div className="cta-overlay" />
         <div className="cta-content">
           <div className="section-label reveal" style={{ justifyContent: 'center' }}>
             Inizia il Viaggio
@@ -765,7 +831,7 @@ export default function App() {
             </button>
           </div>
           <p
-            style={{ marginTop: 20, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}
+            style={{ marginTop: 20, fontSize: 13, color: 'rgba(255,255,255,0.62)' }}
             className="reveal reveal-delay-3"
           >
             ✦ Nessuna carta di credito · Cancella quando vuoi · Sempre in italiano
@@ -819,7 +885,12 @@ export default function App() {
               </li>
               <li>
                 <a href="#angels">
-                  <i className="fas fa-chevron-right" /> Angeli &amp; Maestri
+                  <i className="fas fa-chevron-right" /> Arcangeli
+                </a>
+              </li>
+              <li>
+                <a href="#masters">
+                  <i className="fas fa-chevron-right" /> Maestri Ascesi
                 </a>
               </li>
               <li>
