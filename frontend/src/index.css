@@ -284,12 +284,12 @@
   .hero-desc {
     font-size: 16px;
     line-height: 1.9;
-    color: rgba(255, 255, 255, 0.88);
-    text-shadow: 0 1px 14px rgba(25, 10, 45, 0.75);
+    color: rgba(255, 252, 240, 0.96);
+    text-shadow: 0 1px 14px rgba(25, 10, 45, 0.85);
     max-width: 650px;
     margin: 0 auto 50px;
     animation: fadeInUp 1s ease 0.8s both;
-    font-weight: 300;
+    font-weight: 400;
   }
   .hero-buttons {
     display: flex;
@@ -743,9 +743,10 @@
   .service-title {
     font-family: 'Cinzel Decorative', cursive;
     font-size: 17px;
-    color: #4a2568;
+    color: #3d1b5c;
     margin-bottom: 4px;
     line-height: 1.4;
+    font-weight: 700;
   }
   .service-subtitle {
     font-size: 11px;
@@ -953,9 +954,9 @@
     user-select: none;
   }
   .testimonial-name {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 15px;
-    color: #4a2568;
+    color: #3d1b5c;
   }
   .testimonial-role {
     font-size: 12px;
@@ -1782,11 +1783,12 @@
     gap: 22px;
   }
   .chakra-card {
-    background: rgba(40, 15, 62, 0.42);
-    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(40, 15, 62, 0.55);
+    border: 1px solid rgba(255, 240, 200, 0.28);
     border-radius: 20px;
     padding: 22px 20px 24px;
     transition: border-color 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(6px);
   }
   .chakra-card:hover {
     border-color: rgba(228, 199, 106, 0.45);
@@ -1833,14 +1835,14 @@
   .chakra-gift,
   .chakra-asana {
     font-size: 13px;
-    line-height: 1.55;
-    color: rgba(255, 248, 230, 0.9);
+    line-height: 1.6;
+    color: rgba(255, 250, 235, 0.96);
     margin: 0 0 8px;
   }
   .chakra-bija strong,
   .chakra-gift strong,
   .chakra-asana strong {
-    color: var(--gold);
+    color: var(--gold-light);
   }
 
   /* ========== ANIMATIONS ========== */
