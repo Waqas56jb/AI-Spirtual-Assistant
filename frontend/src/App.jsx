@@ -47,17 +47,6 @@ const DAILY_MESSAGES = [
   },
 ];
 
-const SPIRITUAL_RESPONSES = [
-  "🌟 Gli angeli ti circondano con amore infinito. In questo momento, l'Arcangelo Michele ti protegge e ti guida verso la tua luce più alta. Affidati al processo divino.",
-  "🕊️ Un messaggio speciale per te: 'Sei esattamente dove devi essere. Ogni esperienza è una benedizione in disguise.' — Gli Angeli della Presenza",
-  "✨ La meditazione che suggerisco: chiudi gli occhi, respira profondamente tre volte, visualizza una luce dorata nel tuo cuore. Espandila fino a riempire tutto il tuo essere. Sei già curato.",
-  "🔮 L'Arcangelo Raffaele invia onde di guarigione verde smeraldo verso di te. Lascia che penetrino in ogni cellula, dissolvendo blocchi e riportando armonia.",
-  "💫 Oggi è un giorno di trasformazione. Scegli di lasciare andare ciò che non ti serve più. L'universo sostituirà ogni vuoto con abbondanza e amore.",
-  "🌙 Il numero angelico che vedo per te oggi è 444 — un segno potente che gli angeli sono presenti, ti sostengono e tutto andrà per il meglio.",
-  "🪶 L'Arcangelo Gabriele porta un messaggio: è tempo di esprimere la tua verità. La tua voce è preziosa. Condividi i tuoi doni con il mondo.",
-  "⭐ Sri AmmaBhagavan dice: 'Quando due o più si riuniscono nel nome dell'amore e della coscienza, la grazia divina è sempre presente.' Sei benedetto.",
-];
-
 const FEATURES = [
   {
     icon: 'fa-dove',
@@ -182,6 +171,31 @@ const PARTICLES = [
   { left: '40%', top: '75%', delay: '3s', duration: '8.5s', char: '☆' },
 ];
 
+/** Dev: Vite proxies `/api` → backend :3001. Prod: set `VITE_API_URL` to API origin (no trailing slash). */
+const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+
+async function requestChatReply(message, sessionId) {
+  const url = `${API_BASE}/api/chat`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      message,
+      sessionId: sessionId || undefined,
+      language: 'it',
+    }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const errText = typeof data.error === 'string' ? data.error : `Errore HTTP ${res.status}`;
+    throw new Error(errText);
+  }
+  if (!data.success || typeof data.response !== 'string' || !data.response.trim()) {
+    throw new Error('Risposta non valida dal server.');
+  }
+  return data;
+}
+
 function formatTime(d = new Date()) {
   return `${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
@@ -210,7 +224,7 @@ export default function App() {
   ]);
 
   const chatScrollRef = useRef(null);
-  const resIdxRef = useRef(0);
+  const sessionIdRef = useRef(null);
 
   const stars = useMemo(() => {
     return Array.from({ length: 200 }, (_, i) => {
@@ -271,41 +285,43 @@ export default function App() {
     }, 300);
   }, []);
 
+  const postUserTurn = useCallback(async (trimmed) => {
+    const userTime = formatTime();
+    setChatMessages((m) => [...m, { role: 'user', text: trimmed, time: userTime }]);
+    setTyping(true);
+    try {
+      const data = await requestChatReply(trimmed, sessionIdRef.current);
+      if (data.sessionId) sessionIdRef.current = data.sessionId;
+      setChatMessages((m) => [...m, { role: 'bot', text: data.response.trim(), time: formatTime() }]);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Connessione non riuscita.';
+      setChatMessages((m) => [
+        ...m,
+        {
+          role: 'bot',
+          text: `⚠️ ${msg}\n\nVerifica che il server sia avviato (npm run dev nella cartella server) e che OPENAI_API_KEY sia impostata in server/.env.`,
+          time: formatTime(),
+        },
+      ]);
+    } finally {
+      setTyping(false);
+    }
+  }, []);
+
   const sendMessage = useCallback(() => {
     const text = chatInput.trim();
     if (!text) return;
     setChatInput('');
-    const userTime = formatTime();
-    setChatMessages((m) => [...m, { role: 'user', text, time: userTime }]);
-    setTyping(true);
-    const delay = 1200 + Math.random() * 800;
-    setTimeout(() => {
-      setTyping(false);
-      const resp = SPIRITUAL_RESPONSES[resIdxRef.current % SPIRITUAL_RESPONSES.length];
-      resIdxRef.current += 1;
-      setChatMessages((m) => [...m, { role: 'bot', text: resp, time: formatTime() }]);
-    }, delay);
-  }, [chatInput]);
+    postUserTurn(text);
+  }, [chatInput, postUserTurn]);
 
   const sendQuickAndSubmit = useCallback(
     (text) => {
-      setChatInput(text);
-      setTimeout(() => {
-        const trimmed = text.trim();
-        if (!trimmed) return;
-        const userTime = formatTime();
-        setChatMessages((m) => [...m, { role: 'user', text: trimmed, time: userTime }]);
-        setTyping(true);
-        const delay = 1200 + Math.random() * 800;
-        setTimeout(() => {
-          setTyping(false);
-          const resp = SPIRITUAL_RESPONSES[resIdxRef.current % SPIRITUAL_RESPONSES.length];
-          resIdxRef.current += 1;
-          setChatMessages((m) => [...m, { role: 'bot', text: resp, time: formatTime() }]);
-        }, delay);
-      }, 0);
+      const trimmed = text.trim();
+      if (!trimmed) return;
+      postUserTurn(trimmed);
     },
-    []
+    [postUserTurn]
   );
 
   const daily = DAILY_MESSAGES[dailyIdx];
@@ -850,7 +866,7 @@ export default function App() {
                   ✦
                 </div>
               ) : null}
-              <div>
+              <div className="msg-body">
                 <div className="msg-bubble" style={{ whiteSpace: 'pre-wrap' }}>
                   {msg.text}
                 </div>
@@ -878,7 +894,7 @@ export default function App() {
               <div className="chat-avatar" style={{ width: 34, height: 34, fontSize: 14, alignSelf: 'flex-end' }}>
                 ✦
               </div>
-              <div>
+              <div className="msg-body">
                 <div className="msg-bubble" style={{ padding: '16px 20px' }}>
                   <div className="typing-indicator">
                     <div className="typing-dot" />
