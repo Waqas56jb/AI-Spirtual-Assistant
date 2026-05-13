@@ -5,7 +5,6 @@ import img1 from '../assets/image1.png';
 import img2 from '../assets/image2.png';
 import img3 from '../assets/image3.png';
 import img4 from '../assets/image4.png';
-import img5 from '../assets/image5.png';
 import img6 from '../assets/image6.png';
 import img7 from '../assets/image7.png';
 import img8 from '../assets/image8.png';
@@ -147,11 +146,6 @@ const GALLERY_ITEMS = [
     alt: 'Galleria spirituale — immagine 11',
     label: 'Guida divina',
   },
-  {
-    src: img5,
-    alt: 'Galleria spirituale — immagine 5',
-    label: 'Luce interiore',
-  },
 ];
 
 const ANGELS = [
@@ -162,7 +156,6 @@ const ANGELS = [
   { name: 'Zadkiel', role: 'Angelo della Fiamma Viola', img: img17, delay: 'reveal-delay-5' },
   { name: 'Metatron', role: 'Guardiano della Geometria Sacra', img: img18, delay: 'reveal-delay-1' },
   { name: 'Jophiel', role: 'Angelo della Bellezza e della Saggezza Divina', img: img12, delay: 'reveal-delay-2' },
-  { name: 'Altri Angeli', role: 'Tutta la schiera celeste di luce', icon: '✦', delay: 'reveal-delay-3' },
 ];
 
 const MASTERS = [
