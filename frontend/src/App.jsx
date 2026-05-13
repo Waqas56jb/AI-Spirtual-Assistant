@@ -88,33 +88,123 @@ const FEATURES = [
 ];
 
 const GALLERY_ITEMS = [
-  { tall: true, src: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=600&q=80', alt: 'Angelo celeste', label: 'Luce Celeste' },
-  { src: 'https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=600&q=80', alt: 'Meditazione', label: 'Meditazione Divina' },
-  { wide: true, src: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=900&q=80', alt: 'Natura sacra', label: 'Natura Sacra' },
-  { src: 'https://images.unsplash.com/photo-1502230831726-fe5549140034?w=600&q=80', alt: 'Stelle', label: 'Universo Infinito' },
-  { src: 'https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?w=600&q=80', alt: 'Cristalli', label: 'Energia dei Cristalli' },
-  { src: 'https://images.unsplash.com/photo-1489549132488-d00b7eee80f1?w=600&q=80', alt: 'Tramonto spirituale', label: "Alba dell'Anima" },
-  { src: 'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=600&q=80', alt: 'Lotus', label: 'Fiore del Loto' },
+  {
+    tall: true,
+    src: 'https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=700&q=80',
+    alt: 'Scultura angelica',
+    label: 'Presenza Angelica',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80',
+    alt: 'Luce sacra attraverso il vetro',
+    label: 'Luce Celeste',
+  },
+  {
+    wide: true,
+    src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&q=80',
+    alt: 'Cielo e nubi',
+    label: 'Regni Celesti',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1438032007358-48b8e688e510?w=600&q=80',
+    alt: 'Interno di chiesa',
+    label: 'Santuario di Pace',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1548625149-fc4a29dff105?w=600&q=80',
+    alt: 'Vetrate e archi',
+    label: "Finestre dell'Anima",
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=600&q=80',
+    alt: 'Cielo stellato',
+    label: 'Infinito Divino',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1579783902614-a3fb39279c0c?w=600&q=80',
+    alt: 'Arte spirituale',
+    label: 'Ali di Luce',
+  },
 ];
 
 const ANGELS = [
-  { icon: '⚔️', name: 'Michele', role: 'Protettore e Guerriero della Luce', delay: 'reveal-delay-1' },
-  { icon: '📯', name: 'Gabriele', role: 'Messaggero della Comunicazione Divina', delay: 'reveal-delay-2' },
-  { icon: '💚', name: 'Raffaele', role: 'Angelo della Guarigione Universale', delay: 'reveal-delay-3' },
-  { icon: '🔥', name: 'Uriele', role: 'Luce della Saggezza e Verità', delay: 'reveal-delay-4' },
-  { icon: '💜', name: 'Zadkiel', role: 'Angelo della Fiamma Viola', delay: 'reveal-delay-5' },
-  { icon: '🌟', name: 'Metatron', role: 'Guardiano della Geometria Sacra', delay: 'reveal-delay-1' },
-  { icon: '🙏', name: 'Sri Amma Bhagavan', role: "Maestro dell'Oneness e Risveglio", delay: 'reveal-delay-2' },
-  { icon: '✨', name: 'Sai Baba', role: "Avatar dell'Amore Divino", delay: 'reveal-delay-3' },
-  { icon: '☯️', name: 'Buddha', role: "Maestro dell'Illuminazione", delay: 'reveal-delay-4' },
-  { icon: '❤️', name: 'Gesù', role: "Maestro dell'Amore Incondizionato", delay: 'reveal-delay-5' },
-  { icon: '🌺', name: 'Kuan Yin', role: 'Dea della Compassione', delay: 'reveal-delay-1' },
-  { icon: '🌙', name: 'Saint Germain', role: 'Maestro della Trasformazione', delay: 'reveal-delay-2' },
+  {
+    name: 'Michele',
+    role: 'Protettore e Guerriero della Luce',
+    img: 'https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=400&q=80',
+    delay: 'reveal-delay-1',
+  },
+  {
+    name: 'Gabriele',
+    role: 'Messaggero della Comunicazione Divina',
+    img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80',
+    delay: 'reveal-delay-2',
+  },
+  {
+    name: 'Raffaele',
+    role: 'Angelo della Guarigione Universale',
+    img: 'https://images.unsplash.com/photo-1438032007358-48b8e688e510?w=400&q=80',
+    delay: 'reveal-delay-3',
+  },
+  {
+    name: 'Uriele',
+    role: 'Luce della Saggezza e Verità',
+    img: 'https://images.unsplash.com/photo-1548625149-fc4a29dff105?w=400&q=80',
+    delay: 'reveal-delay-4',
+  },
+  {
+    name: 'Zadkiel',
+    role: 'Angelo della Fiamma Viola',
+    img: 'https://images.unsplash.com/photo-1579783902614-a3fb39279c0c?w=400&q=80',
+    delay: 'reveal-delay-5',
+  },
+  {
+    name: 'Metatron',
+    role: 'Guardiano della Geometria Sacra',
+    img: 'https://images.unsplash.com/photo-1516339901601-2e1a37cde0db?w=400&q=80',
+    delay: 'reveal-delay-1',
+  },
+  {
+    name: 'Sri Amma Bhagavan',
+    role: "Maestro dell'Oneness e Risveglio",
+    img: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80',
+    delay: 'reveal-delay-2',
+  },
+  {
+    name: 'Sai Baba',
+    role: "Avatar dell'Amore Divino",
+    img: 'https://images.unsplash.com/photo-1438032007358-48b8e688e510?w=400&q=80',
+    delay: 'reveal-delay-3',
+  },
+  {
+    name: 'Buddha',
+    role: "Maestro dell'Illuminazione",
+    img: 'https://images.unsplash.com/photo-1601823981391-f5d6034e73fe?w=400&q=80',
+    delay: 'reveal-delay-4',
+  },
+  {
+    name: 'Gesù',
+    role: "Maestro dell'Amore Incondizionato",
+    img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80',
+    delay: 'reveal-delay-5',
+  },
+  {
+    name: 'Kuan Yin',
+    role: 'Dea della Compassione',
+    img: 'https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=400&q=80',
+    delay: 'reveal-delay-1',
+  },
+  {
+    name: 'Saint Germain',
+    role: 'Maestro della Trasformazione',
+    img: 'https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=400&q=80',
+    delay: 'reveal-delay-2',
+  },
 ];
 
 const SERVICES = [
   {
-    img: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=700&q=80',
+    img: 'https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=700&q=80',
     alt: 'Lettura angelica',
     tag: 'Lettura Spirituale',
     title: 'Lettura delle Carte Angeliche',
@@ -130,8 +220,8 @@ const SERVICES = [
     linkText: 'Scopri di Più',
   },
   {
-    img: 'https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=700&q=80',
-    alt: 'Guarigione energetica',
+    img: 'https://images.unsplash.com/photo-1548625149-fc4a29dff105?w=700&q=80',
+    alt: 'Luce e guarigione spirituale',
     tag: 'Guarigione',
     title: "Guarigione con l'Energia Angelica",
     desc: 'Sessioni di guarigione energetica che rimuovono blocchi e ripristinano l\'armonia del corpo, mente e spirito.',
@@ -142,21 +232,21 @@ const SERVICES = [
 const TESTIMONIALS = [
   {
     text: 'AI ANGEL ha trasformato completamente la mia pratica spirituale quotidiana. I messaggi angelici sono incredibilmente precisi e toccanti. Mi sento davvero guidata.',
-    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&q=80',
+    avatar: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=120&q=80',
     name: 'Sofia Marinelli',
     role: 'Insegnante di Yoga, Milano',
     delay: 'reveal-delay-1',
   },
   {
     text: "Finalmente un'intelligenza artificiale che capisce davvero la spiritualità! Le meditazioni guidate sono bellissime. Consiglio a tutti i cercatori spirituali.",
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80',
+    avatar: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=120&q=80',
     name: 'Marco Benedetti',
     role: 'Terapeuta Olistico, Roma',
     delay: 'reveal-delay-2',
   },
   {
     text: 'Come professionista olistica, AI ANGEL mi ha dato una visibilità incredibile. I miei clienti arrivano già preparati spiritualmente. Fantastico servizio!',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80',
+    avatar: 'https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=120&q=80',
     name: 'Chiara Luminosi',
     role: 'Guaritrice Energetica, Firenze',
     delay: 'reveal-delay-3',
@@ -469,8 +559,8 @@ export default function App() {
           <div className="about-image-wrap reveal">
             <div className="about-image-glow" />
             <img
-              src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=85"
-              alt="Angeli spirituali"
+              src="https://images.unsplash.com/photo-1542042497-e4e85460cb8f?w=800&q=85"
+              alt="Arte e presenza angelica"
               className="about-image"
             />
             <div className="about-image-frame" />
@@ -592,7 +682,9 @@ export default function App() {
         <div className="angels-scroll">
           {ANGELS.map((a) => (
             <div key={a.name} className={`angel-card reveal ${a.delay}`}>
-              <span className="angel-icon">{a.icon}</span>
+              <div className="angel-thumb-wrap">
+                <img className="angel-thumb" src={a.img} alt={a.name} loading="lazy" />
+              </div>
               <div className="angel-name">{a.name}</div>
               <div className="angel-role">{a.role}</div>
             </div>
