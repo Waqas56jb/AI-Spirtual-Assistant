@@ -171,8 +171,12 @@ const PARTICLES = [
   { left: '40%', top: '75%', delay: '3s', duration: '8.5s', char: '☆' },
 ];
 
-/** Dev: Vite proxies `/api` → backend :3001. Prod: set `VITE_API_URL` to API origin (no trailing slash). */
-const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+/** Dev: empty → Vite proxy `/api` → localhost:3001. Prod: VITE_API_URL or default deployed API. */
+const DEFAULT_PRODUCTION_API = 'https://ai-spirtual-assistant-backend.vercel.app';
+const API_BASE = (
+  (import.meta.env.VITE_API_URL || '').replace(/\/$/, '') ||
+  (import.meta.env.PROD ? DEFAULT_PRODUCTION_API : '')
+);
 
 async function requestChatReply(message, sessionId) {
   const url = `${API_BASE}/api/chat`;

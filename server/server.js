@@ -8,7 +8,7 @@
  *
  *  SETUP INSTRUCTIONS:
  *  1. npm init -y
- *  2. npm install express openai dotenv cors helmet express-rate-limit morgan uuid
+ *  2. npm install express openai dotenv cors uuid
  *  3. Create a .env file (see .env.example below)
  *  4. node server.js
  *
@@ -29,9 +29,6 @@
 const express       = require("express");
 const OpenAI        = require("openai");
 const cors          = require("cors");
-const helmet        = require("helmet");
-const rateLimit     = require("express-rate-limit");
-const morgan        = require("morgan");
 const { v4: uuidv4} = require("uuid");
 require("dotenv").config();
 
@@ -92,53 +89,15 @@ setInterval(() => {
 // ============================================================
 //  MIDDLEWARE
 // ============================================================
-app.use(helmet({ contentSecurityPolicy: false }));
-app.use(morgan("combined"));
-app.use(express.json({ limit: "16kb" }));
+app.use(express.json({ limit: "32kb" }));
 
-// CORS — comma-separated ALLOWED_ORIGIN; trailing slashes ignored for matching
-const defaultOrigins = [
-  "https://ai-spirtual-assistant.vercel.app",
-  "http://localhost:3000",
-  "http://localhost:5173",
-  "http://127.0.0.1:5173",
-  "http://localhost:5500",
-  "http://127.0.0.1:5500",
-];
-const envOrigins = (process.env.ALLOWED_ORIGIN || "")
-  .split(",")
-  .map((s) => s.trim().replace(/\/$/, ""))
-  .filter(Boolean);
-const allowedOrigins = [...new Set([...envOrigins, ...defaultOrigins])];
-
-function originAllowed(origin) {
-  if (!origin) return true;
-  const o = origin.replace(/\/$/, "");
-  return allowedOrigins.some((a) => o === a.replace(/\/$/, ""));
-}
-
-app.use(cors({
-  origin: (origin, cb) => cb(null, originAllowed(origin)),
-  methods: ["GET", "POST", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "X-Session-ID"],
-}));
-
-// Rate limiting — 60 requests per minute per IP
-const limiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 60,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: "Troppe richieste. Riprova tra un minuto." },
-});
-app.use("/api/", limiter);
-
-// Stricter limit for chat endpoint — 20 messages/minute
-const chatLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 20,
-  message: { error: "Hai inviato troppi messaggi. Pausa un momento con gli angeli 🕊️" },
-});
+app.use(
+  cors({
+    origin: true,
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "X-Session-ID"],
+  })
+);
 
 // ============================================================
 //  ██████████████████████████████████████████████████████████
@@ -744,7 +703,7 @@ app.get("/api/health", (req, res) => {
 // ============================================================
 //  POST /api/chat — Main chat endpoint
 // ============================================================
-app.post("/api/chat", chatLimiter, async (req, res) => {
+app.post("/api/chat", async (req, res) => {
   try {
     const { message, sessionId: clientSessionId, language } = req.body;
 
@@ -840,7 +799,7 @@ app.post("/api/chat", chatLimiter, async (req, res) => {
 // ============================================================
 //  POST /api/chat/stream — Streaming endpoint (optional)
 // ============================================================
-app.post("/api/chat/stream", chatLimiter, async (req, res) => {
+app.post("/api/chat/stream", async (req, res) => {
   try {
     const { message, sessionId: clientSessionId, language } = req.body;
 

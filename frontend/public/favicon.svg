@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="AI ANGEL">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0D080"/>
+      <stop offset="50%" stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#E8D4A0"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="#0D0821"/>
+  <path fill="url(#g)" d="M16 4l1.2 6.2L22 8l-4.2 4.2L24 16l-6.2-1.2L16 24l-1.8-6.2L8 22l4.2-4.2L8 8l6.2 1.8L16 4z"/>
+</svg>
