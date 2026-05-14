@@ -30,8 +30,8 @@ const servImgCrescita = img1;
 const servImgCarta = img2;
 const servImgLettura = img4;
 
-/** New about hero — 1.jpeg from refreshed asset pack. */
-const ABOUT_IMAGE = asset1;
+/** New about hero — 12.jpeg from refreshed asset pack. */
+const ABOUT_IMAGE = asset12;
 
 const DAYS = [
   'Domenica',
@@ -258,7 +258,7 @@ const MASTERS = [
   { name: 'Sai Baba', role: 'Maestro dell\'Amore e del Servizio', img: asset9, delay: 'reveal-delay-2' },
   { name: 'Buddha', role: 'Risveglio, Compassione, Pace Interiore', img: asset10, delay: 'reveal-delay-3' },
   { name: 'Gesù', role: 'Maestro dell\'Amore e della Luce Cristica', img: asset11, delay: 'reveal-delay-4' },
-  { name: 'Kuan Yin', role: 'Bodhisattva della Compassione Infinita', img: asset12, delay: 'reveal-delay-5' },
+  { name: 'Kuan Yin', role: 'Bodhisattva della Compassione Infinita', img: asset1, delay: 'reveal-delay-5' },
   { name: 'Saint Germain', role: 'Custode della Fiamma Viola della Trasmutazione', img: asset13, delay: 'reveal-delay-1' },
   { name: 'Altri Maestri', role: 'Tutti i Maestri Ascesi della Luce', icon: '✧', delay: 'reveal-delay-2' },
 ];
