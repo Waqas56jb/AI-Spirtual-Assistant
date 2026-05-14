@@ -237,16 +237,24 @@ const FEATURES = [
     delay: 'reveal-delay-1',
   },
   {
-    icon: 'fa-image',
-    title: 'Arte Angelica IA',
-    desc: "Genera immagini mozzafiato di angeli, scenari celesti e mandala spirituali con l'intelligenza artificiale.",
+    icon: 'fa-palette',
+    title: 'Arte Angelica',
+    desc: 'Una galleria curata di arte sacra e angelica: mandala, scenari celesti, simbolismi spirituali. Presto disponibile.',
     delay: 'reveal-delay-2',
+    wip: true,
+  },
+  {
+    icon: 'fa-image',
+    title: 'Genera Immagini con IA',
+    desc: "Crea immagini di angeli, archetipi spirituali e mandala con l'intelligenza artificiale. In fase di sviluppo.",
+    delay: 'reveal-delay-3',
+    wip: true,
   },
   {
     icon: 'fa-hashtag',
     title: 'Numeri Angelici',
     desc: 'Sequenze ricorrenti (111, 222, 333, 444…) e Numero Angelico del Giorno: scopri ogni giorno il significato divino del numero che ti guida.',
-    delay: 'reveal-delay-3',
+    delay: 'reveal-delay-1',
   },
 ];
 
@@ -803,7 +811,8 @@ export default function App() {
         </div>
         <div className="features-grid">
           {FEATURES.map((f) => (
-            <div key={f.title} className={`feature-card reveal ${f.delay}`}>
+            <div key={f.title} className={`feature-card reveal ${f.delay}${f.wip ? ' feature-card--wip' : ''}`}>
+              {f.wip ? <span className="feature-wip-badge"><i className="fas fa-hourglass-half" /> Work in progress</span> : null}
               <div className="feature-icon-wrap">
                 <i className={`fas ${f.icon}`} />
               </div>

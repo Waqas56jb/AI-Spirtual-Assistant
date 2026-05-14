@@ -635,6 +635,44 @@
     line-height: 1.9;
     font-weight: 300;
   }
+  .feature-card--wip {
+    border-style: dashed;
+    border-color: rgba(201, 168, 76, 0.55);
+    background: rgba(255, 255, 255, 0.86);
+  }
+  .feature-card--wip::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      135deg,
+      transparent 0,
+      transparent 28px,
+      rgba(201, 168, 76, 0.04) 28px,
+      rgba(201, 168, 76, 0.04) 30px
+    );
+    pointer-events: none;
+    border-radius: inherit;
+  }
+  .feature-wip-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--deep-purple);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 6px 18px rgba(201, 168, 76, 0.35);
+    z-index: 1;
+  }
+  .feature-wip-badge i { font-size: 10px; }
 
   /* ========== ANGEL GALLERY ========== */
   #gallery {
