@@ -3,14 +3,7 @@ import { ChatBubbleContent } from './ChatBubbleContent.jsx';
 import { ChakraSection } from './ChakraSection.jsx';
 import img1 from '../assets/image1.png';
 import img2 from '../assets/image2.png';
-import img3 from '../assets/image3.png';
 import img4 from '../assets/image4.png';
-import img6 from '../assets/image6.png';
-import img7 from '../assets/image7.png';
-import img8 from '../assets/image8.png';
-import img9 from '../assets/image9.png';
-import img10 from '../assets/image10.png';
-import img11 from '../assets/image11.png';
 import img12 from '../assets/image12.png';
 import img13 from '../assets/image13.png';
 import img14 from '../assets/image14.png';
@@ -18,14 +11,27 @@ import img15 from '../assets/image15.png';
 import img16 from '../assets/image16.png';
 import img17 from '../assets/image17.png';
 import img18 from '../assets/image18.png';
+import asset1 from '../assets/1.jpeg';
+import asset2 from '../assets/2.jpeg';
+import asset3 from '../assets/3.jpeg';
+import asset4 from '../assets/4.jpeg';
+import asset5 from '../assets/5.jpeg';
+import asset6 from '../assets/6.jpeg';
+import asset7 from '../assets/7.jpeg';
+import asset8 from '../assets/8.jpeg';
+import asset9 from '../assets/9.jpeg';
+import asset10 from '../assets/10.jpeg';
+import asset11 from '../assets/11.jpeg';
+import asset12 from '../assets/12.jpeg';
+import asset13 from '../assets/13.jpeg';
 
-/** Servizi: mapping richiesto dal cliente (image1, image2, image4). */
+/** Servizi: mapping richiesto dal cliente. */
 const servImgCrescita = img1;
 const servImgCarta = img2;
 const servImgLettura = img4;
 
-/** Asset cliente `image6` — sezione Chi siamo. `image5` è in galleria (ex sfondo CTA). */
-const ABOUT_IMAGE = img6;
+/** New about hero — 1.jpeg from refreshed asset pack. */
+const ABOUT_IMAGE = asset1;
 
 const DAYS = [
   'Domenica',
@@ -74,6 +80,121 @@ const DAILY_MESSAGES = [
   },
 ];
 
+/** Angelic numbers — root meanings (1-9) used to interpret any 1-999 number,
+ *  plus master/repeat sequences with their classic significance. */
+const ANGEL_NUMBER_ROOTS = {
+  1: 'Nuovi inizi, leadership, manifestazione: i tuoi pensieri stanno creando la tua realtà.',
+  2: 'Equilibrio, fiducia, relazioni divine: continua sul tuo cammino con fede.',
+  3: 'Ascensione, gioia, espressione: i Maestri Ascesi ti sostengono.',
+  4: 'Stabilità, presenza angelica, fondamenta solide: gli Angeli sono al tuo fianco.',
+  5: 'Cambiamento positivo, libertà, trasformazione spirituale in arrivo.',
+  6: 'Amore, famiglia, armonia: lascia andare le preoccupazioni materiali.',
+  7: 'Risveglio mistico, intuizione, conferma divina del tuo percorso.',
+  8: 'Abbondanza, karma, infinito: l\'universo onora il tuo impegno.',
+  9: 'Compimento, missione di servizio, saggezza spirituale piena.',
+};
+const ANGEL_NUMBER_SPECIAL = {
+  111: '111 — Portale di manifestazione: i tuoi pensieri si stanno cristallizzando rapidamente. Mantieni una vibrazione alta.',
+  222: '222 — Fede e pazienza: tutto sta andando esattamente come deve. Gli Angeli ti chiedono di confidare.',
+  333: '333 — Presenza dei Maestri Ascesi: Gesù, Buddha, Sai Baba ti stanno guidando in questo momento.',
+  444: '444 — Protezione angelica intorno a te: una schiera di Angeli ti circonda con amore e luce.',
+  555: '555 — Grande cambiamento spirituale: rilascia il vecchio, la trasformazione divina è qui.',
+  666: '666 — Riequilibrio: riporta l\'attenzione dallo spirituale al materiale con fiducia. Non è negativo.',
+  777: '777 — Conferma celeste: sei perfettamente allineato al tuo cammino di luce. Continua.',
+  888: '888 — Abbondanza in arrivo: ricompense karmiche, prosperità materiale e spirituale.',
+  999: '999 — Compimento di un ciclo: un capitolo si chiude, una rinascita di luce inizia.',
+  1: 'Inizio puro, scintilla creatrice: l\'unità con il Divino.',
+  11: '11 — Numero Maestro: portale di intuizione, illuminazione e canale spirituale aperto.',
+  22: '22 — Numero Maestro: costruttore divino, manifestazione di grandi visioni.',
+  33: '33 — Numero Maestro: Maestro Insegnante, Cristo cosmico, servizio amorevole all\'umanità.',
+};
+function digitalRoot(n) {
+  let r = n;
+  while (r > 9) r = String(r).split('').reduce((a, b) => a + Number(b), 0);
+  return r;
+}
+function getAngelicNumberOfDay(d = new Date()) {
+  const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+  let x = seed;
+  x = ((x * 9301 + 49297) % 233280);
+  const num = (x % 999) + 1;
+  const meaning =
+    ANGEL_NUMBER_SPECIAL[num] ||
+    `${num} — ${ANGEL_NUMBER_ROOTS[digitalRoot(num)]}`;
+  return { num, meaning };
+}
+
+/** Featured events / services to show near the top of the page. */
+const FEATURED_EVENTS = [
+  {
+    tag: 'Servizio in evidenza',
+    title: 'La Lettura Angelica',
+    desc: 'Una sessione personale per scoprire il tuo Angelo Custode, i tuoi doni e il tuo percorso di luce.',
+    icon: 'fa-feather-alt',
+    href: 'https://iltuoangelo.it/la-lettura-angelica/',
+    cta: 'Prenota la sessione',
+  },
+  {
+    tag: 'Percorso',
+    title: 'La Carta Angelica',
+    desc: 'La mappa angelica personale: intuizioni, rituali e visione approfondita del tuo cammino spirituale.',
+    icon: 'fa-scroll',
+    href: 'https://iltuoangelo.it/la-carta-angelica/',
+    cta: 'Scopri di più',
+  },
+  {
+    tag: 'Crescita',
+    title: 'Crescita Personale Angelica',
+    desc: 'Self-esteem Power: trasforma autostima e vita quotidiana con il supporto degli Angeli.',
+    icon: 'fa-dove',
+    href: 'https://iltuoangelo.it/la-crescita-personale-angelica/',
+    cta: 'Inizia il percorso',
+  },
+];
+
+/** Subscription tiers for holistic professionals who want to join AI ANGEL. */
+const PRO_PLANS = [
+  {
+    name: 'Mensile',
+    price: '€29',
+    period: '/ mese',
+    perks: [
+      'Profilo pubblico nella chatbot di AI ANGEL',
+      'Citato dal bot quando rilevante (es. terapie, coaching)',
+      'Link diretto al tuo sito o WhatsApp',
+      'Disdetta in ogni momento',
+    ],
+    badge: '',
+    featured: false,
+  },
+  {
+    name: 'Annuale',
+    price: '€290',
+    period: '/ anno',
+    perks: [
+      'Tutto del piano Mensile',
+      '2 mesi gratuiti rispetto al mensile',
+      'Priorità nelle raccomandazioni del bot',
+      'Banner nella sezione Servizi (a rotazione)',
+    ],
+    badge: 'Più scelto',
+    featured: true,
+  },
+  {
+    name: 'Premium',
+    price: '€590',
+    period: '/ anno',
+    perks: [
+      'Tutto del piano Annuale',
+      'Posizione fissa in homepage',
+      'Card dedicata in sezione Maestri / Coach',
+      'Supporto prioritario e configurazione personalizzata',
+    ],
+    badge: 'Visibilità massima',
+    featured: false,
+  },
+];
+
 const FEATURES = [
   {
     icon: 'fa-dove',
@@ -106,46 +227,20 @@ const FEATURES = [
     delay: 'reveal-delay-2',
   },
   {
-    icon: 'fa-moon',
-    title: 'Astrologia Spirituale',
-    desc: 'Connessioni tra astrologia, angeli planetari e il tuo percorso anima. Interpretazioni profonde e personalizzate.',
+    icon: 'fa-hashtag',
+    title: 'Numeri Angelici',
+    desc: 'Sequenze ricorrenti (111, 222, 333, 444…) e Numero Angelico del Giorno: scopri ogni giorno il significato divino del numero che ti guida.',
     delay: 'reveal-delay-3',
   },
 ];
 
 const GALLERY_ITEMS = [
-  {
-    tall: true,
-    src: img3,
-    alt: 'Galleria spirituale — immagine 3',
-    label: 'Presenza angelica',
-  },
-  {
-    src: img7,
-    alt: 'Galleria spirituale — immagine 7',
-    label: 'Luce angelica',
-  },
-  {
-    wide: true,
-    src: img9,
-    alt: 'Galleria spirituale — immagine 9',
-    label: 'Sacro e bellezza',
-  },
-  {
-    src: img8,
-    alt: 'Galleria spirituale — immagine 8',
-    label: 'Presenza celeste',
-  },
-  {
-    src: img10,
-    alt: 'Galleria spirituale — immagine 10',
-    label: 'Armonia interiore',
-  },
-  {
-    src: img11,
-    alt: 'Galleria spirituale — immagine 11',
-    label: 'Guida divina',
-  },
+  { tall: true, src: asset2, alt: 'Galleria — Presenza angelica', label: 'Presenza angelica' },
+  { src: asset3, alt: 'Galleria — Luce angelica', label: 'Luce angelica' },
+  { wide: true, src: asset4, alt: 'Galleria — Sacro e bellezza', label: 'Sacro e bellezza' },
+  { src: asset5, alt: 'Galleria — Presenza celeste', label: 'Presenza celeste' },
+  { src: asset6, alt: 'Galleria — Armonia interiore', label: 'Armonia interiore' },
+  { src: asset7, alt: 'Galleria — Guida divina', label: 'Guida divina' },
 ];
 
 const ANGELS = [
@@ -159,12 +254,12 @@ const ANGELS = [
 ];
 
 const MASTERS = [
-  { name: 'Sri Amma Bhagavan', role: 'Avatar dell\'Unità e dell\'Illuminazione', icon: '☼', delay: 'reveal-delay-1' },
-  { name: 'Sai Baba', role: 'Maestro dell\'Amore e del Servizio', icon: '☥', delay: 'reveal-delay-2' },
-  { name: 'Buddha', role: 'Risveglio, Compassione, Pace Interiore', icon: '☸', delay: 'reveal-delay-3' },
-  { name: 'Gesù', role: 'Maestro dell\'Amore e della Luce Cristica', icon: '✝', delay: 'reveal-delay-4' },
-  { name: 'Kuan Yin', role: 'Bodhisattva della Compassione Infinita', icon: '☾', delay: 'reveal-delay-5' },
-  { name: 'Saint Germain', role: 'Custode della Fiamma Viola della Trasmutazione', icon: '⚜', delay: 'reveal-delay-1' },
+  { name: 'Sri Amma Bhagavan', role: 'Avatar dell\'Unità e dell\'Illuminazione', img: asset8, delay: 'reveal-delay-1' },
+  { name: 'Sai Baba', role: 'Maestro dell\'Amore e del Servizio', img: asset9, delay: 'reveal-delay-2' },
+  { name: 'Buddha', role: 'Risveglio, Compassione, Pace Interiore', img: asset10, delay: 'reveal-delay-3' },
+  { name: 'Gesù', role: 'Maestro dell\'Amore e della Luce Cristica', img: asset11, delay: 'reveal-delay-4' },
+  { name: 'Kuan Yin', role: 'Bodhisattva della Compassione Infinita', img: asset12, delay: 'reveal-delay-5' },
+  { name: 'Saint Germain', role: 'Custode della Fiamma Viola della Trasmutazione', img: asset13, delay: 'reveal-delay-1' },
   { name: 'Altri Maestri', role: 'Tutti i Maestri Ascesi della Luce', icon: '✧', delay: 'reveal-delay-2' },
 ];
 
@@ -392,6 +487,7 @@ export default function App() {
   );
 
   const daily = DAILY_MESSAGES[dailyIdx];
+  const angelicNumber = useMemo(() => getAngelicNumberOfDay(), []);
   const year = new Date().getFullYear();
 
   return (
@@ -417,6 +513,9 @@ export default function App() {
         <button type="button" className="mobile-close" onClick={toggleMobile} aria-label="Chiudi menu">
           <i className="fas fa-times" />
         </button>
+        <a href="#showcase" onClick={closeMobile}>
+          In Evidenza
+        </a>
         <a href="#about" onClick={closeMobile}>
           Chi Siamo
         </a>
@@ -425,6 +524,9 @@ export default function App() {
         </a>
         <a href="#services" onClick={closeMobile}>
           Servizi
+        </a>
+        <a href="#professionals" onClick={closeMobile}>
+          Professionisti
         </a>
         <a href="#chakras" onClick={closeMobile}>
           Chakra
@@ -452,10 +554,7 @@ export default function App() {
         </a>
         <ul className="nav-links">
           <li>
-            <a href="#about">Chi Siamo</a>
-          </li>
-          <li>
-            <a href="#features">Funzioni</a>
+            <a href="#showcase">Evidenza</a>
           </li>
           <li>
             <a href="#services">Servizi</a>
@@ -471,6 +570,9 @@ export default function App() {
           </li>
           <li>
             <a href="#daily">Messaggio</a>
+          </li>
+          <li>
+            <a href="#professionals">Pro</a>
           </li>
           <li>
             <a href="#cta" className="nav-cta">
@@ -543,6 +645,37 @@ export default function App() {
         </div>
       </section>
 
+      <section id="showcase">
+        <div className="showcase-header reveal">
+          <div className="section-label" style={{ justifyContent: 'center' }}>In Evidenza</div>
+          <h2 className="section-title">Eventi &amp; Servizi del Momento</h2>
+          <div className="divider" />
+          <p className="section-desc">
+            I percorsi <strong>Il Tuo Angelo</strong> con cui iniziare oggi: prenota una sessione, scopri la tua mappa
+            angelica o avvia la tua crescita personale con supporto divino.
+          </p>
+        </div>
+        <div className="showcase-grid">
+          {FEATURED_EVENTS.map((e, i) => (
+            <a
+              key={e.title}
+              href={e.href}
+              target="_blank"
+              rel="noreferrer"
+              className={`showcase-card reveal reveal-delay-${i + 1}`}
+            >
+              <div className="showcase-icon"><i className={`fas ${e.icon}`} /></div>
+              <div className="showcase-tag">{e.tag}</div>
+              <h3 className="showcase-title">{e.title}</h3>
+              <p className="showcase-desc">{e.desc}</p>
+              <span className="showcase-cta">
+                {e.cta} <i className="fas fa-arrow-right" />
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
       <section id="about">
         <div className="about-grid">
           <div className="about-image-wrap reveal">
@@ -575,7 +708,7 @@ export default function App() {
                   <i className="fas fa-globe" />
                 </div>
                 <div>
-                  <div className="about-feature-title">Multilingue — Italiano Prima</div>
+                  <div className="about-feature-title">Multilingue Globale</div>
                   <div className="about-feature-desc">
                     Risponde in italiano, inglese, spagnolo, francese e oltre 50 lingue. La tua lingua spirituale.
                   </div>
@@ -697,8 +830,12 @@ export default function App() {
         <div className="angels-scroll masters-scroll">
           {MASTERS.map((m) => (
             <div key={m.name} className={`angel-card master-card reveal ${m.delay}`}>
-              <div className="angel-thumb-wrap angel-thumb-wrap--icon">
-                <span className="angel-thumb-icon" aria-hidden>{m.icon}</span>
+              <div className={`angel-thumb-wrap${m.icon ? ' angel-thumb-wrap--icon' : ''}`}>
+                {m.img ? (
+                  <img className="angel-thumb" src={m.img} alt={m.name} loading="lazy" />
+                ) : (
+                  <span className="angel-thumb-icon" aria-hidden>{m.icon}</span>
+                )}
               </div>
               <div className="angel-name">{m.name}</div>
               <div className="angel-role">{m.role}</div>
@@ -771,7 +908,70 @@ export default function App() {
               Nuovo Messaggio
             </button>
           </div>
+
+          <div className="angelic-number-card reveal reveal-delay-4">
+            <div className="angelic-number-label">Numero Angelico del Giorno</div>
+            <div className="angelic-number-value">{angelicNumber.num}</div>
+            <p className="angelic-number-meaning">{angelicNumber.meaning}</p>
+            <a
+              href="https://angelscalculator.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="angelic-number-link"
+            >
+              <i className="fas fa-external-link-alt" />
+              Approfondisci su angelscalculator.com
+            </a>
+          </div>
         </div>
+      </section>
+
+      <section id="professionals">
+        <div className="professionals-header reveal">
+          <div className="section-label" style={{ justifyContent: 'center' }}>Collabora con noi</div>
+          <h2 className="section-title">Sei un Professionista Olistico?</h2>
+          <div className="divider" />
+          <p className="section-desc">
+            Unisciti ad <strong>AI ANGEL</strong>: il chatbot consiglierà i tuoi servizi olistici a migliaia di
+            anime in cerca. Visibilità globale, sottoscrizione mensile o annuale, disdetta in ogni momento.
+          </p>
+        </div>
+        <div className="pro-grid">
+          {PRO_PLANS.map((p, i) => (
+            <div
+              key={p.name}
+              className={`pro-card reveal reveal-delay-${i + 1}${p.featured ? ' pro-card--featured' : ''}`}
+            >
+              {p.badge ? <div className="pro-badge">{p.badge}</div> : null}
+              <h3 className="pro-name">{p.name}</h3>
+              <div className="pro-price">
+                <span className="pro-price-amount">{p.price}</span>
+                <span className="pro-price-period">{p.period}</span>
+              </div>
+              <ul className="pro-perks">
+                {p.perks.map((perk) => (
+                  <li key={perk}>
+                    <i className="fas fa-check" /> {perk}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="https://wa.me/393409271570?text=Salve%2C%20vorrei%20unirmi%20ad%20AI%20ANGEL%20come%20professionista%20olistico."
+                target="_blank"
+                rel="noreferrer"
+                className="pro-cta"
+              >
+                <i className="fab fa-whatsapp" />
+                Candidati ora
+              </a>
+            </div>
+          ))}
+        </div>
+        <p className="pro-note reveal">
+          Per informazioni complete contatta l&apos;Angel Coach al{' '}
+          <a href="tel:+393409271570">+39 340 927 1570</a> o via{' '}
+          <a href="mailto:info@iltuoangelo.it">info@iltuoangelo.it</a>.
+        </p>
       </section>
 
       <section id="testimonials">
@@ -827,7 +1027,7 @@ export default function App() {
             style={{ marginTop: 20, fontSize: 13, color: 'rgba(255,255,255,0.62)' }}
             className="reveal reveal-delay-3"
           >
-            ✦ Nessuna carta di credito · Cancella quando vuoi · Sempre in italiano
+            ✦ Nessuna carta di credito · Cancella quando vuoi · Disponibile 24/7
           </p>
         </div>
       </section>
@@ -899,6 +1099,11 @@ export default function App() {
               <li>
                 <a href="#daily">
                   <i className="fas fa-chevron-right" /> Messaggio Giornaliero
+                </a>
+              </li>
+              <li>
+                <a href="#professionals">
+                  <i className="fas fa-chevron-right" /> Collabora con noi
                 </a>
               </li>
             </ul>

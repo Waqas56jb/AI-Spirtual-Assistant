@@ -981,6 +981,287 @@
   }
   .stars { color: var(--gold); font-size: 13px; margin-bottom: 16px; }
 
+  /* ========== SHOWCASE (Events & Featured Services) ========== */
+  #showcase {
+    padding: 110px 60px 90px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--brand-bg);
+  }
+  .showcase-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .showcase-card {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 230, 0.92));
+    border: 1px solid rgba(228, 199, 106, 0.45);
+    border-radius: 24px;
+    padding: 36px 30px 32px;
+    text-decoration: none;
+    color: var(--text-card);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s, border-color 0.4s;
+    box-shadow: 0 16px 40px rgba(20, 8, 40, 0.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .showcase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .showcase-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 60px rgba(20, 8, 40, 0.5), var(--glow-gold);
+    border-color: var(--gold);
+  }
+  .showcase-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: var(--deep-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: var(--glow-gold);
+  }
+  .showcase-tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    font-weight: 700;
+  }
+  .showcase-title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 19px;
+    color: #3d1b5c;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+  .showcase-desc {
+    font-size: 14px;
+    color: var(--text-card-muted);
+    line-height: 1.7;
+    flex: 1;
+  }
+  .showcase-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold-dark);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: gap 0.3s;
+  }
+  .showcase-card:hover .showcase-cta { gap: 14px; }
+
+  /* ========== ANGELIC NUMBER OF THE DAY ========== */
+  .angelic-number-card {
+    margin: 50px auto 0;
+    max-width: 640px;
+    padding: 36px 32px 32px;
+    border-radius: 26px;
+    background: linear-gradient(150deg, rgba(45, 21, 72, 0.88), rgba(90, 53, 136, 0.78));
+    border: 1px solid rgba(228, 199, 106, 0.45);
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), var(--glow-gold);
+    backdrop-filter: blur(10px);
+  }
+  .angelic-number-label {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+  }
+  .angelic-number-value {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(56px, 10vw, 88px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff8e1, var(--gold) 60%, #fff3c4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 14px rgba(228, 199, 106, 0.5));
+  }
+  .angelic-number-meaning {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(255, 250, 235, 0.95);
+    margin-bottom: 18px;
+    font-style: italic;
+  }
+  .angelic-number-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border: 1px solid rgba(228, 199, 106, 0.6);
+    border-radius: 30px;
+    color: var(--gold-light);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    background: rgba(228, 199, 106, 0.08);
+  }
+  .angelic-number-link:hover {
+    background: var(--gold);
+    color: var(--deep-purple);
+    border-color: var(--gold);
+  }
+
+  /* ========== PROFESSIONALS (Subscriptions) ========== */
+  #professionals {
+    padding: 130px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--brand-bg);
+  }
+  .professionals-header { text-align: center; margin-bottom: 60px; }
+  .pro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    max-width: 1150px;
+    margin: 0 auto;
+  }
+  .pro-card {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(228, 199, 106, 0.3);
+    border-radius: 24px;
+    padding: 38px 30px 32px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+    box-shadow: 0 14px 40px rgba(20, 8, 40, 0.3);
+  }
+  .pro-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 22px 56px rgba(20, 8, 40, 0.5), var(--glow-gold);
+  }
+  .pro-card--featured {
+    background: linear-gradient(160deg, #fff7d6, #fffaf0);
+    border-color: var(--gold);
+    transform: scale(1.04);
+    box-shadow: 0 22px 60px rgba(20, 8, 40, 0.5), var(--glow-gold);
+  }
+  .pro-card--featured:hover { transform: scale(1.06) translateY(-4px); }
+  .pro-badge {
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--deep-purple);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 6px 18px rgba(228, 199, 106, 0.5);
+    white-space: nowrap;
+  }
+  .pro-name {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 18px;
+    color: #3d1b5c;
+    margin-bottom: 14px;
+    letter-spacing: 2px;
+  }
+  .pro-price { margin-bottom: 22px; }
+  .pro-price-amount {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--gold-dark);
+    line-height: 1;
+  }
+  .pro-price-period {
+    font-size: 13px;
+    color: var(--text-card-muted);
+    margin-left: 4px;
+  }
+  .pro-perks {
+    list-style: none;
+    text-align: left;
+    margin: 0 0 26px;
+  }
+  .pro-perks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 13.5px;
+    color: var(--text-card-muted);
+    line-height: 1.55;
+    border-bottom: 1px solid rgba(45, 21, 72, 0.08);
+  }
+  .pro-perks li:last-child { border-bottom: none; }
+  .pro-perks li i {
+    color: var(--gold);
+    margin-top: 4px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .pro-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 28px;
+    background: #25d366;
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+  }
+  .pro-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(37, 211, 102, 0.6);
+  }
+  .pro-note {
+    text-align: center;
+    margin-top: 40px;
+    color: rgba(255, 250, 235, 0.92);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+  }
+  .pro-note a {
+    color: var(--gold-light);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .pro-note a:hover { color: #fff; }
+
   /* ========== ANGELS & MASTERS SECTIONS ========== */
   #angels,
   #masters {
@@ -1849,7 +2130,8 @@
   .chakra-bija,
   .chakra-mantra,
   .chakra-gift,
-  .chakra-asana {
+  .chakra-asana,
+  .chakra-mudra {
     font-size: 13px;
     line-height: 1.6;
     color: rgba(255, 250, 235, 0.96);
@@ -1857,7 +2139,8 @@
   }
   .chakra-bija strong,
   .chakra-gift strong,
-  .chakra-asana strong {
+  .chakra-asana strong,
+  .chakra-mudra strong {
     color: var(--gold-light);
   }
 
@@ -1939,6 +2222,10 @@
     .gallery-item.tall { grid-row: span 1; }
     .gallery-item.wide { grid-column: span 2; }
     .angels-scroll { grid-template-columns: repeat(3, 1fr); }
+    .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+    .pro-grid { grid-template-columns: 1fr; max-width: 520px; }
+    .pro-card--featured { transform: none; }
+    .pro-card--featured:hover { transform: translateY(-4px); }
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
 
@@ -1960,11 +2247,16 @@
     #testimonials,
     #angels,
     #masters,
+    #showcase,
+    #professionals,
     #daily,
     #cta {
       padding: 80px max(20px, var(--sal)) 80px max(20px, var(--sar));
     }
     #masters { padding-top: 24px; }
+    .showcase-grid { grid-template-columns: 1fr; }
+    .pro-grid { grid-template-columns: 1fr; max-width: 460px; }
+    .pro-card--featured { transform: none; }
     footer {
       padding: 60px max(20px, var(--sal)) max(30px, var(--sab)) max(20px, var(--sar));
     }
@@ -2076,11 +2368,15 @@
     #testimonials,
     #angels,
     #masters,
+    #showcase,
+    #professionals,
     #daily,
     #cta {
       padding: 64px max(16px, var(--sal)) 64px max(16px, var(--sar));
     }
     #masters { padding-top: 20px; }
+    .angelic-number-card { padding: 30px 22px 26px; }
+    .pro-card { padding: 32px 22px 28px; }
     .gallery-header,
     .features-header,
     .services-header,

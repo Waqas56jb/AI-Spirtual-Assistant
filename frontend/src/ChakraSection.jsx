@@ -1,4 +1,4 @@
-/** Seven chakras: bija mantra, gifts, suggested asana — IT / EN labels for iltuoangelo audience */
+/** Seven chakras: bija mantra, gifts, suggested asana, and mudra — IT/EN labels for iltuoangelo audience */
 const CHAKRAS = [
   {
     id: 'muladhara',
@@ -9,6 +9,7 @@ const CHAKRAS = [
     mantra: 'Ripeti mentalmente LAM con consapevolezza della radice.',
     gift: 'Radicamento, sicurezza, appartenenza alla Terra.',
     asana: 'Tadasana (montagna), Malasana.',
+    mudra: 'Muladhara Mudra — uniscono pollici e indici, le altre dita intrecciate verso il basso.',
   },
   {
     id: 'svadhisthana',
@@ -19,6 +20,7 @@ const CHAKRAS = [
     mantra: 'Ripeti VAM dolcemente, lasciando fluire creatività ed emozione.',
     gift: 'Piacere sano, creatività, flusso emotivo.',
     asana: 'Baddha Koṇāsana, movimenti fluidi di bacino.',
+    mudra: 'Shakti Mudra — mani a coppa davanti al ventre, pollici uniti dietro le dita.',
   },
   {
     id: 'manipura',
@@ -29,6 +31,7 @@ const CHAKRAS = [
     mantra: 'Ripeti RAM per accendere la volontà e la dignità personale.',
     gift: 'Forza interiore, autostima, trasformazione.',
     asana: 'Navāsana (barca), twist delicati.',
+    mudra: 'Rudra Mudra — pollice, indice e anulare uniti; medio e mignolo distesi.',
   },
   {
     id: 'anahata',
@@ -39,6 +42,7 @@ const CHAKRAS = [
     mantra: 'Ripeti YAM aprendo il petto verso compassione e perdono.',
     gift: 'Amore incondizionato, guarigione del cuore.',
     asana: 'Matsyāsana leggero, Ustrāsana (cammello) con guida.',
+    mudra: 'Padma Mudra — mani a forma di loto davanti al cuore, polsi e mignoli uniti.',
   },
   {
     id: 'vishuddha',
@@ -49,6 +53,7 @@ const CHAKRAS = [
     mantra: 'Ripeti HAM onorando la tua verità autentica.',
     gift: 'Espressione chiara, ascolto profondo, verità.',
     asana: 'Matsyāsana (pesce), allungamento del collo con attenzione.',
+    mudra: 'Granthita Mudra — dita intrecciate, pollici uniti davanti alla gola.',
   },
   {
     id: 'ajna',
@@ -59,6 +64,7 @@ const CHAKRAS = [
     mantra: 'Ripeti AH AUM nel terzo occhio, con respiro lento e mente raccolta.',
     gift: 'Intuizione, visione interiore, discernimento.',
     asana: 'Balāsana con consapevolezza del terzo occhio.',
+    mudra: 'Jnana Mudra — pollice e indice uniti, le altre dita distese sulle ginocchia.',
   },
   {
     id: 'sahasrara',
@@ -69,6 +75,7 @@ const CHAKRAS = [
     mantra: 'Ripeti OGUM SATYAM AUM, lasciando risuonare la verità e la connessione divina.',
     gift: 'Unità spirituale, pace, illuminazione.',
     asana: 'Sukhāsana meditazione, Śavāsana integrativa.',
+    mudra: 'Sahasrara Mudra — mignoli uniti verso l\'alto, le altre dita intrecciate sopra la testa.',
   },
 ];
 
@@ -77,12 +84,12 @@ export function ChakraSection() {
     <section id="chakras">
       <div className="chakras-header reveal">
         <div className="section-label">Energia &amp; Meditazione</div>
-        <h2 className="section-title">I 7 Chakra — bija mantra &amp; pratica</h2>
+        <h2 className="section-title">I 7 Chakra — bija, mudra &amp; pratica</h2>
         <div className="divider" />
         <p className="section-desc">
           Un percorso guidato: per ogni chakra trovi il <strong>beeja mantra</strong>, i{' '}
-          <strong>doni</strong> energetici e un <strong>suggerimento di asana</strong>. Medita un chakra alla volta,
-          con respiro lento e presenza angelica.
+          <strong>doni</strong> energetici, un <strong>suggerimento di asana</strong> e il{' '}
+          <strong>mudra</strong> associato. Medita un chakra alla volta, con respiro lento e presenza angelica.
         </p>
       </div>
       <div className="chakras-grid">
@@ -103,7 +110,10 @@ export function ChakraSection() {
               <strong>Doni:</strong> {c.gift}
             </p>
             <p className="chakra-asana">
-              <strong>Asana suggerita:</strong> {c.asana}
+              <strong>Asana:</strong> {c.asana}
+            </p>
+            <p className="chakra-mudra">
+              <strong>Mudra:</strong> {c.mudra}
             </p>
           </article>
         ))}
