@@ -3,36 +3,36 @@ import { ChatBubbleContent } from './ChatBubbleContent.jsx';
 import { ChakraSection } from './ChakraSection.jsx';
 import img1 from '../assets/image1.png';
 import img2 from '../assets/image2.png';
+import img3 from '../assets/image3.png';
 import img4 from '../assets/image4.png';
-import img12 from '../assets/image12.png';
-import img13 from '../assets/image13.png';
-import img14 from '../assets/image14.png';
-import img15 from '../assets/image15.png';
-import img16 from '../assets/image16.png';
-import img17 from '../assets/image17.png';
-import img18 from '../assets/image18.png';
-import asset1 from '../assets/1.jpeg';
-import asset2 from '../assets/2.jpeg';
-import asset3 from '../assets/3.jpeg';
-import asset4 from '../assets/4.jpeg';
-import asset5 from '../assets/5.jpeg';
-import asset6 from '../assets/6.jpeg';
-import asset7 from '../assets/7.jpeg';
-import asset8 from '../assets/8.jpeg';
-import asset9 from '../assets/9.jpeg';
-import asset10 from '../assets/10.jpeg';
-import asset11 from '../assets/11.jpeg';
-import asset12 from '../assets/12.jpeg';
-import asset13 from '../assets/13.jpeg';
+import img5 from '../assets/image5.png';
+import img6 from '../assets/image6.png';
+import img7 from '../assets/image7.png';
+import img8 from '../assets/image8.png';
+import img9 from '../assets/image9.png';
+import img10 from '../assets/image10.png';
 import asset14 from '../assets/14.jpeg';
+import michaelImg from '../assets/Michael.jpeg';
+import gabrielImg from '../assets/Gabriel.jpeg';
+import raphaelImg from '../assets/Raphael.jpeg';
+import urielImg from '../assets/Uriel.jpeg';
+import zadkielImg from '../assets/Zadkiel.jpeg';
+import metatronImg from '../assets/Metatron.jpeg';
+import jophielImg from '../assets/Jophiel.jpeg';
+import sriAmmaImg from '../assets/Sri AmmaBhagavan.jpeg';
+import saiBabaImg from '../assets/Sai Baba.jpeg';
+import buddhaImg from '../assets/Buddha.jpeg';
+import jesusImg from '../assets/Jesus.jpeg';
+import kuanYinImg from '../assets/Kuan yin.jpeg';
+import saintGermainImg from '../assets/Saint Germain.jpeg';
 
 /** Servizi: mapping richiesto dal cliente. */
 const servImgCrescita = img1;
 const servImgCarta = img2;
 const servImgLettura = img4;
 
-/** New about hero — 12.jpeg from refreshed asset pack. */
-const ABOUT_IMAGE = asset12;
+/** About section hero — original "Angel at PC". */
+const ABOUT_IMAGE = img6;
 
 const DAYS = [
   'Domenica',
@@ -259,31 +259,31 @@ const FEATURES = [
 ];
 
 const GALLERY_ITEMS = [
-  { tall: true, src: asset2, alt: 'Galleria — Presenza angelica', label: 'Presenza angelica' },
-  { src: asset3, alt: 'Galleria — Luce angelica', label: 'Luce angelica' },
-  { wide: true, src: asset4, alt: 'Galleria — Sacro e bellezza', label: 'Sacro e bellezza' },
-  { src: asset5, alt: 'Galleria — Presenza celeste', label: 'Presenza celeste' },
-  { src: asset6, alt: 'Galleria — Armonia interiore', label: 'Armonia interiore' },
-  { src: asset7, alt: 'Galleria — Guida divina', label: 'Guida divina' },
+  { tall: true, src: img3, alt: 'Galleria — Presenza angelica', label: 'Presenza angelica' },
+  { src: img5, alt: 'Galleria — Luce angelica', label: 'Luce angelica' },
+  { wide: true, src: img7, alt: 'Galleria — Sacro e bellezza', label: 'Sacro e bellezza' },
+  { src: img8, alt: 'Galleria — Presenza celeste', label: 'Presenza celeste' },
+  { src: img9, alt: 'Galleria — Armonia interiore', label: 'Armonia interiore' },
+  { src: img10, alt: 'Galleria — Guida divina', label: 'Guida divina' },
 ];
 
 const ANGELS = [
-  { name: 'Michele', role: 'Protettore e Guerriero della Luce', img: img13, delay: 'reveal-delay-1' },
-  { name: 'Gabriele', role: 'Messaggero della Comunicazione Divina', img: img14, delay: 'reveal-delay-2' },
-  { name: 'Raffaele', role: 'Angelo della Guarigione Universale', img: img15, delay: 'reveal-delay-3' },
-  { name: 'Uriele', role: 'Luce della Saggezza e Verità', img: img16, delay: 'reveal-delay-4' },
-  { name: 'Zadkiel', role: 'Angelo della Fiamma Viola', img: img17, delay: 'reveal-delay-5' },
-  { name: 'Metatron', role: 'Guardiano della Geometria Sacra', img: img18, delay: 'reveal-delay-1' },
-  { name: 'Jophiel', role: 'Angelo della Bellezza e della Saggezza Divina', img: img12, delay: 'reveal-delay-2' },
+  { name: 'Michele', role: 'Protettore e Guerriero della Luce', img: michaelImg, delay: 'reveal-delay-1' },
+  { name: 'Gabriele', role: 'Messaggero della Comunicazione Divina', img: gabrielImg, delay: 'reveal-delay-2' },
+  { name: 'Raffaele', role: 'Angelo della Guarigione Universale', img: raphaelImg, delay: 'reveal-delay-3' },
+  { name: 'Uriele', role: 'Luce della Saggezza e Verità', img: urielImg, delay: 'reveal-delay-4' },
+  { name: 'Zadkiel', role: 'Angelo della Fiamma Viola', img: zadkielImg, delay: 'reveal-delay-5' },
+  { name: 'Metatron', role: 'Guardiano della Geometria Sacra', img: metatronImg, delay: 'reveal-delay-1' },
+  { name: 'Jophiel', role: 'Angelo della Bellezza e della Saggezza Divina', img: jophielImg, delay: 'reveal-delay-2' },
 ];
 
 const MASTERS = [
-  { name: 'Sri Amma Bhagavan', role: 'Avatar dell\'Unità e dell\'Illuminazione', img: asset8, delay: 'reveal-delay-1' },
-  { name: 'Sai Baba', role: 'Maestro dell\'Amore e del Servizio', img: asset9, delay: 'reveal-delay-2' },
-  { name: 'Buddha', role: 'Risveglio, Compassione, Pace Interiore', img: asset10, delay: 'reveal-delay-3' },
-  { name: 'Gesù', role: 'Maestro dell\'Amore e della Luce Cristica', img: asset11, delay: 'reveal-delay-4' },
-  { name: 'Kuan Yin', role: 'Bodhisattva della Compassione Infinita', img: asset1, delay: 'reveal-delay-5' },
-  { name: 'Saint Germain', role: 'Custode della Fiamma Viola della Trasmutazione', img: asset13, delay: 'reveal-delay-1' },
+  { name: 'Sri Amma Bhagavan', role: 'Avatar dell\'Unità e dell\'Illuminazione', img: sriAmmaImg, delay: 'reveal-delay-1' },
+  { name: 'Sai Baba', role: 'Maestro dell\'Amore e del Servizio', img: saiBabaImg, delay: 'reveal-delay-2' },
+  { name: 'Buddha', role: 'Risveglio, Compassione, Pace Interiore', img: buddhaImg, delay: 'reveal-delay-3' },
+  { name: 'Gesù', role: 'Maestro dell\'Amore e della Luce Cristica', img: jesusImg, delay: 'reveal-delay-4' },
+  { name: 'Kuan Yin', role: 'Bodhisattva della Compassione Infinita', img: kuanYinImg, delay: 'reveal-delay-5' },
+  { name: 'Saint Germain', role: 'Custode della Fiamma Viola della Trasmutazione', img: saintGermainImg, delay: 'reveal-delay-1' },
   { name: 'Altri Maestri', role: 'Tutti i Maestri Ascesi della Luce', icon: '✧', delay: 'reveal-delay-2' },
 ];
 
