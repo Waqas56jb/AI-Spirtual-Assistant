@@ -981,6 +981,133 @@
   }
   .stars { color: var(--gold); font-size: 13px; margin-bottom: 16px; }
 
+  /* ========== KIT PRONTO SOCCORSO ANGELICO (hero card) ========== */
+  .kit-hero {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.9fr) 1.1fr;
+    gap: 36px;
+    align-items: stretch;
+    max-width: 1180px;
+    margin: 0 auto 60px;
+    padding: 28px;
+    background: linear-gradient(140deg, rgba(45, 21, 72, 0.92), rgba(90, 53, 136, 0.82));
+    border: 1px solid rgba(228, 199, 106, 0.55);
+    border-radius: 28px;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.45), var(--glow-gold);
+    position: relative;
+    overflow: hidden;
+  }
+  .kit-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at top right, rgba(228, 199, 106, 0.15) 0%, transparent 55%),
+      radial-gradient(ellipse at bottom left, rgba(200, 160, 255, 0.12) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .kit-hero-media {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(228, 199, 106, 0.4);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+    background: rgba(20, 8, 40, 0.4);
+    z-index: 1;
+    min-height: 360px;
+  }
+  .kit-hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: saturate(1.06) contrast(1.04);
+  }
+  .kit-hero-badge {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--deep-purple);
+    padding: 7px 16px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  }
+  .kit-hero-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    z-index: 1;
+    padding: 8px 4px;
+  }
+  .kit-hero-title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1.2;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+  }
+  .kit-hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: rgba(255, 250, 235, 0.95);
+    margin-bottom: 22px;
+    line-height: 1.5;
+  }
+  .kit-hero-list {
+    list-style: none;
+    margin: 0 0 22px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .kit-hero-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: rgba(255, 252, 240, 0.96);
+  }
+  .kit-hero-list li i {
+    color: var(--gold);
+    font-size: 16px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 8px rgba(228, 199, 106, 0.5));
+  }
+  .kit-hero-price {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+  }
+  .kit-hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .kit-hero-cta {
+    min-height: 46px;
+    padding: 12px 24px;
+    font-size: 13px;
+  }
+
   /* ========== SHOWCASE (Events & Featured Services) ========== */
   #showcase {
     padding: 110px 60px 90px;
@@ -2257,6 +2384,14 @@
     .showcase-grid { grid-template-columns: 1fr; }
     .pro-grid { grid-template-columns: 1fr; max-width: 460px; }
     .pro-card--featured { transform: none; }
+    .kit-hero {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 22px;
+    }
+    .kit-hero-media { min-height: 280px; }
+    .kit-hero-ctas { flex-direction: column; }
+    .kit-hero-cta { width: 100%; justify-content: center; }
     footer {
       padding: 60px max(20px, var(--sal)) max(30px, var(--sab)) max(20px, var(--sar));
     }

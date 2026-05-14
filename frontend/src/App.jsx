@@ -24,6 +24,7 @@ import asset10 from '../assets/10.jpeg';
 import asset11 from '../assets/11.jpeg';
 import asset12 from '../assets/12.jpeg';
 import asset13 from '../assets/13.jpeg';
+import asset14 from '../assets/14.jpeg';
 
 /** Servizi: mapping richiesto dal cliente. */
 const servImgCrescita = img1;
@@ -124,7 +125,22 @@ function getAngelicNumberOfDay(d = new Date()) {
   return { num, meaning };
 }
 
-/** Featured events / services to show near the top of the page. */
+/** Featured kit (visual hero card) and event/service cards in the showcase. */
+const FEATURED_KIT = {
+  image: asset14,
+  tag: 'Promo in Evidenza',
+  title: 'Il Kit di Pronto Soccorso Angelico',
+  subtitle: 'La tua guida quotidiana di protezione e trasformazione',
+  highlights: [
+    '11 mini audio potenziati con le frequenze di Angeli e Arcangeli',
+    'Sonno profondo, protezione dell\'aura, purificazione energetica',
+    'Salute, finanze, amore, lavoro: soluzioni mirate ed efficaci',
+    'Studiato dal Dottor Iacopo Paolucci — Angel Coach, oltre 20 anni di esperienza',
+  ],
+  ctaPrimary: { label: 'Prenota su WhatsApp', href: 'https://wa.me/393409271570?text=Vorrei%20info%20sul%20Kit%20di%20Pronto%20Soccorso%20Angelico' },
+  ctaSecondary: { label: 'iltuoangelo.it', href: 'https://www.iltuoangelo.it' },
+};
+
 const FEATURED_EVENTS = [
   {
     tag: 'Servizio in evidenza',
@@ -655,6 +671,34 @@ export default function App() {
             angelica o avvia la tua crescita personale con supporto divino.
           </p>
         </div>
+
+        <div className="kit-hero reveal">
+          <div className="kit-hero-media">
+            <img src={FEATURED_KIT.image} alt={FEATURED_KIT.title} loading="lazy" />
+            <span className="kit-hero-badge">{FEATURED_KIT.tag}</span>
+          </div>
+          <div className="kit-hero-body">
+            <h3 className="kit-hero-title">{FEATURED_KIT.title}</h3>
+            <p className="kit-hero-subtitle">{FEATURED_KIT.subtitle}</p>
+            <ul className="kit-hero-list">
+              {FEATURED_KIT.highlights.map((h) => (
+                <li key={h}><i className="fas fa-check-circle" /> {h}</li>
+              ))}
+            </ul>
+            <p className="kit-hero-price">
+              <i className="fas fa-tag" /> Prezzo speciale promozionale — chiedi info
+            </p>
+            <div className="kit-hero-ctas">
+              <a className="btn-primary kit-hero-cta" href={FEATURED_KIT.ctaPrimary.href} target="_blank" rel="noreferrer">
+                <i className="fab fa-whatsapp" /> {FEATURED_KIT.ctaPrimary.label}
+              </a>
+              <a className="btn-secondary kit-hero-cta" href={FEATURED_KIT.ctaSecondary.href} target="_blank" rel="noreferrer">
+                <i className="fas fa-globe" /> {FEATURED_KIT.ctaSecondary.label}
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div className="showcase-grid">
           {FEATURED_EVENTS.map((e, i) => (
             <a
