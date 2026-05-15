@@ -6,18 +6,8 @@ import { ChakraSection } from './ChakraSection.jsx';
 import img1 from '../assets/image1.png';
 import img2 from '../assets/image2.png';
 import img4 from '../assets/image4.png';
-import gallArt1 from '../assets/1.jpeg';
-import gallArt2 from '../assets/2.jpeg';
-import gallArt3 from '../assets/3.jpeg';
-import gallArt4 from '../assets/4.jpeg';
-import gallArt5 from '../assets/5.jpeg';
-import gallArt6 from '../assets/6.jpeg';
-import gallArt7 from '../assets/7.jpeg';
-import gallArt8 from '../assets/8.jpeg';
-import gallArt9 from '../assets/9.jpeg';
-import gallArt10 from '../assets/10.jpeg';
-import gallArt11 from '../assets/11.jpeg';
-import gallArt13 from '../assets/13.jpeg';
+import galleryPanelAngelsMasters from '../assets/gallery1.jpeg';
+import galleryPanelSacredHindu from '../assets/gallery2.jpeg';
 import aboutSectionPhoto from '../assets/12.jpeg';
 import showcaseKitImage from '../assets/showcase.jpeg';
 import michaelImg from '../assets/Michael.jpeg';
@@ -259,20 +249,20 @@ const FEATURES = [
   },
 ];
 
-/** Arte spirituale — solo JPEG dalla cartella assets (separati da servizi / kit / chi siamo). */
-const GALLERY_ITEMS = [
-  { src: gallArt1, alt: 'Galleria — Luminosità angelica', label: 'Luce angelica' },
-  { src: gallArt2, alt: 'Galleria — Presenza celeste', label: 'Presenza celeste' },
-  { src: gallArt3, alt: 'Galleria — Silenzio sacro', label: 'Sacralità interiore' },
-  { src: gallArt4, alt: 'Galleria — Geometria di luce', label: 'Geometria celeste' },
-  { src: gallArt5, alt: 'Galleria — Energia e trasformazione', label: 'Energia e trasformazione' },
-  { src: gallArt6, alt: 'Galleria — Contemplazione', label: 'Contemplazione' },
-  { src: gallArt7, alt: 'Galleria — Ali della grazia', label: 'Ali della grazia' },
-  { src: gallArt8, alt: 'Galleria — Luce interiore', label: 'Luce interiore' },
-  { src: gallArt9, alt: 'Galleria — Serenità celeste', label: 'Serenità celeste' },
-  { src: gallArt10, alt: 'Galleria — Benedizione divina', label: 'Benedizione divina' },
-  { src: gallArt11, alt: 'Galleria — Meditazione e pace', label: "Pace dell'anima" },
-  { src: gallArt13, alt: 'Galleria — Connessione divina', label: 'Connessione divina' },
+/** Griglia 3×4: ogni voce è un ritaglio 1/6 da gallery1 o gallery2 (compositi 3×2). */
+const GALLERY_SPRITE_TILES = [
+  { id: 'g1-michele', src: galleryPanelAngelsMasters, col: 0, row: 0, label: 'Arcangelo Michele', alt: 'Arcangelo Michele — protezione e luce' },
+  { id: 'g1-gabriele', src: galleryPanelAngelsMasters, col: 1, row: 0, label: 'Arcangelo Gabriele', alt: 'Arcangelo Gabriele — messaggio divino' },
+  { id: 'g1-raffaele', src: galleryPanelAngelsMasters, col: 2, row: 0, label: 'Arcangelo Raffaele', alt: 'Arcangelo Raffaele — guarigione' },
+  { id: 'g1-elmorya', src: galleryPanelAngelsMasters, col: 0, row: 1, label: 'Maestro El Morya', alt: 'Maestro El Morya — saggezza' },
+  { id: 'g1-buddha', src: galleryPanelAngelsMasters, col: 1, row: 1, label: 'Maestro Buddha', alt: 'Maestro Buddha — illuminazione' },
+  { id: 'g1-saintg', src: galleryPanelAngelsMasters, col: 2, row: 1, label: 'Maestro Saint Germain', alt: 'Maestro Saint Germain — trasmutazione' },
+  { id: 'g2-ganesh', src: galleryPanelSacredHindu, col: 0, row: 0, label: 'Ganesh', alt: 'Ganesh — saggezza e nuovi inizi' },
+  { id: 'g2-kalki', src: galleryPanelSacredHindu, col: 1, row: 0, label: 'Kalki', alt: 'Kalki — avatar di Vishnu' },
+  { id: 'g2-lakshmi', src: galleryPanelSacredHindu, col: 2, row: 0, label: 'Lakshmi', alt: 'Lakshmi — prosperità' },
+  { id: 'g2-shiva', src: galleryPanelSacredHindu, col: 0, row: 1, label: 'Shiva', alt: 'Shiva — trasformazione divina' },
+  { id: 'g2-krishna', src: galleryPanelSacredHindu, col: 1, row: 1, label: 'Krishna', alt: 'Krishna — amore divino' },
+  { id: 'g2-kali', src: galleryPanelSacredHindu, col: 2, row: 1, label: 'Kali', alt: 'Kali — liberazione spirituale' },
 ];
 
 const ANGELS = [
@@ -839,10 +829,19 @@ export default function App() {
           <h2 className="section-title">La Bellezza del Mondo Celeste</h2>
           <div className="divider" />
         </div>
-        <div className="gallery-grid reveal reveal-delay-1" role="list">
-          {GALLERY_ITEMS.map((g) => (
-            <div key={g.alt} className="gallery-item" role="listitem">
-              <img src={g.src} alt={g.alt} loading="lazy" decoding="async" />
+        <div className="gallery-grid gallery-grid--sprites reveal reveal-delay-1" role="list">
+          {GALLERY_SPRITE_TILES.map((g) => (
+            <div key={g.id} className="gallery-item gallery-item--sprite" role="listitem">
+              <div
+                className="gallery-item-sprite-bg"
+                role="img"
+                aria-label={g.alt}
+                style={{
+                  backgroundImage: `url(${g.src})`,
+                  backgroundSize: '300% 200%',
+                  backgroundPosition: `${(g.col / 2) * 100}% ${g.row * 100}%`,
+                }}
+              />
               <div className="gallery-overlay" aria-hidden="true">
                 <span className="gallery-label">{g.label}</span>
               </div>

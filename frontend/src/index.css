@@ -692,6 +692,11 @@
     max-width: 1120px;
     margin: 0 auto;
   }
+  /* Dodici ritagli da due compositi 3×2: colonne più larghe, riquadri più alti */
+  .gallery-grid--sprites {
+    max-width: min(1240px, 100%);
+    gap: clamp(18px, 2.8vw, 28px);
+  }
   .gallery-item {
     position: relative;
     overflow: hidden;
@@ -704,6 +709,24 @@
       0 10px 32px rgba(25, 8, 45, 0.28),
       0 0 0 1px rgba(255, 252, 245, 0.12) inset;
     background: linear-gradient(160deg, rgba(45, 15, 75, 0.45) 0%, rgba(20, 6, 38, 0.65) 100%);
+  }
+  /* Ritaglio da composito uniforme 3×2 (background-size 300% 200%) */
+  .gallery-item--sprite {
+    aspect-ratio: 3 / 5;
+  }
+  .gallery-item-sprite-bg {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+    filter: saturate(1.06) brightness(1.03);
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+  .gallery-item--sprite:hover .gallery-item-sprite-bg {
+    transform: translateZ(0) scale(1.06);
+    filter: saturate(1.12) brightness(1.06);
   }
   .gallery-item img {
     width: 100%;
