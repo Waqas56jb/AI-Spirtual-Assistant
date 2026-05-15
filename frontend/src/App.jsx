@@ -10,6 +10,12 @@ import gallArt1 from '../assets/1.jpeg';
 import gallArt2 from '../assets/2.jpeg';
 import gallArt3 from '../assets/3.jpeg';
 import gallArt4 from '../assets/4.jpeg';
+import gallArt5 from '../assets/5.jpeg';
+import gallArt6 from '../assets/6.jpeg';
+import gallArt7 from '../assets/7.jpeg';
+import gallArt8 from '../assets/8.jpeg';
+import gallArt9 from '../assets/9.jpeg';
+import gallArt10 from '../assets/10.jpeg';
 import gallArt11 from '../assets/11.jpeg';
 import gallArt13 from '../assets/13.jpeg';
 import aboutSectionPhoto from '../assets/12.jpeg';
@@ -239,13 +245,6 @@ const FEATURES = [
     delay: 'reveal-delay-1',
   },
   {
-    icon: 'fa-palette',
-    title: 'Arte Angelica',
-    desc: 'Una galleria curata di arte sacra e angelica: mandala, scenari celesti, simbolismi spirituali. Presto disponibile.',
-    delay: 'reveal-delay-2',
-    wip: true,
-  },
-  {
     icon: 'fa-image',
     title: 'Genera Immagini con IA',
     desc: "Crea immagini di angeli, archetipi spirituali e mandala con l'intelligenza artificiale. In fase di sviluppo.",
@@ -266,6 +265,12 @@ const GALLERY_ITEMS = [
   { src: gallArt2, alt: 'Galleria — Presenza celeste', label: 'Presenza celeste' },
   { src: gallArt3, alt: 'Galleria — Silenzio sacro', label: 'Sacralità interiore' },
   { src: gallArt4, alt: 'Galleria — Geometria di luce', label: 'Geometria celeste' },
+  { src: gallArt5, alt: 'Galleria — Energia e trasformazione', label: 'Energia e trasformazione' },
+  { src: gallArt6, alt: 'Galleria — Contemplazione', label: 'Contemplazione' },
+  { src: gallArt7, alt: 'Galleria — Ali della grazia', label: 'Ali della grazia' },
+  { src: gallArt8, alt: 'Galleria — Luce interiore', label: 'Luce interiore' },
+  { src: gallArt9, alt: 'Galleria — Serenità celeste', label: 'Serenità celeste' },
+  { src: gallArt10, alt: 'Galleria — Benedizione divina', label: 'Benedizione divina' },
   { src: gallArt11, alt: 'Galleria — Meditazione e pace', label: "Pace dell'anima" },
   { src: gallArt13, alt: 'Galleria — Connessione divina', label: 'Connessione divina' },
 ];
