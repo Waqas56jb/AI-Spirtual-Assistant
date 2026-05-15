@@ -1,3 +1,5 @@
+
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ChatBubbleContent } from './ChatBubbleContent.jsx';
 import { ChakraSection } from './ChakraSection.jsx';
@@ -6,11 +8,11 @@ import img2 from '../assets/image2.png';
 import img3 from '../assets/image3.png';
 import img4 from '../assets/image4.png';
 import img5 from '../assets/image5.png';
-import img6 from '../assets/image6.png';
 import img7 from '../assets/image7.png';
 import img8 from '../assets/image8.png';
 import img9 from '../assets/image9.png';
 import img10 from '../assets/image10.png';
+import aboutSectionPhoto from '../assets/12.jpeg';
 import asset14 from '../assets/14.jpeg';
 import michaelImg from '../assets/Michael.jpeg';
 import gabrielImg from '../assets/Gabriel.jpeg';
@@ -31,8 +33,8 @@ const servImgCrescita = img1;
 const servImgCarta = img2;
 const servImgLettura = img4;
 
-/** About section hero — original "Angel at PC". */
-const ABOUT_IMAGE = img6;
+/** Chi siamo — immagine a sinistra. */
+const ABOUT_IMAGE = aboutSectionPhoto;
 
 const DAYS = [
   'Domenica',
