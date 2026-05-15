@@ -683,66 +683,91 @@
   }
   .gallery-header {
     text-align: center;
-    margin-bottom: 70px;
+    margin-bottom: clamp(44px, 6vw, 64px);
   }
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 320px;
-    gap: 22px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 2.5vw, 26px);
+    max-width: 1120px;
+    margin: 0 auto;
   }
   .gallery-item {
     position: relative;
     overflow: hidden;
-    border-radius: 22px;
-    cursor: pointer;
-    border: 1px solid rgba(228, 199, 106, 0.28);
-    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s, border-color 0.45s;
-    box-shadow: 0 14px 40px rgba(20, 8, 40, 0.35), 0 0 0 1px rgba(255, 240, 200, 0.06) inset;
-    background: rgba(20, 8, 40, 0.4);
+    border-radius: 18px;
+    cursor: default;
+    aspect-ratio: 3 / 4;
+    border: 1px solid rgba(240, 215, 140, 0.35);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s, border-color 0.5s;
+    box-shadow:
+      0 10px 32px rgba(25, 8, 45, 0.28),
+      0 0 0 1px rgba(255, 252, 245, 0.12) inset;
+    background: linear-gradient(160deg, rgba(45, 15, 75, 0.45) 0%, rgba(20, 6, 38, 0.65) 100%);
   }
-  .gallery-item.tall { grid-row: span 2; }
-  .gallery-item.wide { grid-column: span 2; }
   .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+    object-position: center;
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
     display: block;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    filter: saturate(1.05) contrast(1.04);
+    filter: saturate(1.06) brightness(1.03);
     will-change: transform;
     backface-visibility: hidden;
     transform: translateZ(0);
   }
   .gallery-item:hover {
-    border-color: rgba(228, 199, 106, 0.7);
-    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.55), var(--glow-gold);
-    transform: translateY(-4px);
+    border-color: rgba(240, 215, 140, 0.55);
+    box-shadow:
+      0 20px 52px rgba(15, 4, 32, 0.45),
+      0 0 0 1px rgba(240, 215, 140, 0.2) inset;
+    transform: translateY(-3px);
   }
   .gallery-item:hover img {
-    transform: scale(1.06);
-    filter: saturate(1.15) contrast(1.08) brightness(1.04);
+    transform: scale(1.045);
+    filter: saturate(1.12) brightness(1.06);
+  }
+  .gallery-item:focus-visible {
+    outline: 2px solid var(--gold-light);
+    outline-offset: 3px;
   }
   .gallery-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(40, 14, 70, 0.92) 0%, rgba(40, 14, 70, 0.35) 45%, transparent 70%);
+    background: linear-gradient(
+      to top,
+      rgba(18, 6, 32, 0.88) 0%,
+      rgba(18, 6, 32, 0.25) 48%,
+      transparent 74%
+    );
     display: flex;
     align-items: flex-end;
-    padding: 22px 24px;
-    opacity: 0;
-    transition: opacity 0.4s;
+    justify-content: center;
+    padding: 18px 16px 20px;
+    pointer-events: none;
+    transition: opacity 0.35s ease, background 0.35s ease;
+    opacity: 1;
   }
-  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-item:hover .gallery-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(12, 4, 24, 0.92) 0%,
+      rgba(12, 4, 24, 0.35) 50%,
+      transparent 76%
+    );
+  }
   .gallery-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-style: italic;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 11px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 4px;
+    text-transform: uppercase;
     color: var(--gold-light);
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-    letter-spacing: 0.5px;
+    text-align: center;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+    line-height: 1.35;
   }
 
   /* ========== SERVICES / HOLISTIC ========== */
@@ -1028,10 +1053,12 @@
     max-width: 1180px;
     margin: 0 auto 60px;
     padding: 28px;
-    background: linear-gradient(135deg, #c9a84c 0%, #e4c76a 35%, #f0d78c 60%, #c9a84c 100%);
-    border: 1px solid rgba(255, 250, 220, 0.7);
+    background: var(--brand-bg);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 28px;
-    box-shadow: 0 22px 60px rgba(120, 80, 20, 0.5), 0 0 0 1px rgba(255, 240, 180, 0.25) inset;
+    box-shadow:
+      0 22px 56px rgba(35, 8, 65, 0.42),
+      0 0 0 1px rgba(255, 252, 255, 0.12) inset;
     position: relative;
     overflow: hidden;
   }
@@ -1040,8 +1067,8 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse at top right, rgba(255, 252, 230, 0.35) 0%, transparent 55%),
-      radial-gradient(ellipse at bottom left, rgba(180, 130, 30, 0.18) 0%, transparent 55%);
+      radial-gradient(ellipse at top right, rgba(255, 255, 255, 0.14) 0%, transparent 55%),
+      radial-gradient(ellipse at bottom left, rgba(0, 0, 0, 0.12) 0%, transparent 55%);
     pointer-events: none;
     z-index: 0;
   }
@@ -1059,7 +1086,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
+    /* Flyer layout: bottom has audio list + gold CTA — keep that region visible when cropped */
+    object-position: center bottom;
     display: block;
     filter: saturate(1.06) contrast(1.04);
   }
@@ -1092,7 +1120,7 @@
     color: #ffffff;
     line-height: 1.2;
     margin-bottom: 10px;
-    text-shadow: 0 2px 6px rgba(90, 60, 10, 0.65), 0 1px 2px rgba(0, 0, 0, 0.35);
+    text-shadow: 0 2px 14px rgba(18, 4, 40, 0.55), 0 1px 2px rgba(0, 0, 0, 0.35);
     letter-spacing: 0.5px;
   }
   .kit-hero-subtitle {
@@ -1102,7 +1130,7 @@
     color: #ffffff;
     margin-bottom: 22px;
     line-height: 1.5;
-    text-shadow: 0 1px 4px rgba(90, 60, 10, 0.55);
+    text-shadow: 0 1px 8px rgba(18, 4, 40, 0.45);
   }
   .kit-hero-list {
     list-style: none;
@@ -1119,27 +1147,27 @@
     font-size: 14.5px;
     line-height: 1.55;
     color: #ffffff;
-    text-shadow: 0 1px 3px rgba(90, 60, 10, 0.55);
+    text-shadow: 0 1px 8px rgba(18, 4, 40, 0.45);
     font-weight: 500;
   }
   .kit-hero-list li i {
-    color: #ffffff;
+    color: var(--gold-light);
     font-size: 16px;
     margin-top: 3px;
     flex-shrink: 0;
-    filter: drop-shadow(0 1px 2px rgba(90, 60, 10, 0.55));
+    filter: drop-shadow(0 1px 3px rgba(18, 4, 40, 0.5));
   }
   .kit-hero-price {
     font-size: 13px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--gold-light);
     margin-bottom: 22px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-weight: 800;
-    text-shadow: 0 1px 3px rgba(90, 60, 10, 0.6);
+    text-shadow: 0 1px 8px rgba(18, 4, 40, 0.5);
   }
   .kit-hero-ctas {
     display: flex;
@@ -2407,11 +2435,9 @@
   @media (max-width: 1200px) {
     .features-grid { grid-template-columns: repeat(2, 1fr); }
     .gallery-grid {
-      grid-template-columns: repeat(2, 1fr);
-      grid-auto-rows: 280px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
     }
-    .gallery-item.tall { grid-row: span 1; }
-    .gallery-item.wide { grid-column: span 2; }
     .angels-scroll { grid-template-columns: repeat(3, 1fr); }
     .showcase-grid { grid-template-columns: repeat(2, 1fr); }
     .pro-grid { grid-template-columns: 1fr; max-width: 520px; }
@@ -2464,9 +2490,8 @@
     .features-grid { grid-template-columns: 1fr; }
     .features-header { margin-bottom: 56px; }
     .gallery-grid {
-      grid-template-columns: 1fr 1fr;
-      grid-auto-rows: 220px;
-      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
     }
     .services-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
@@ -2498,9 +2523,9 @@
   @media (max-width: 600px) {
     .gallery-grid {
       grid-template-columns: 1fr;
-      grid-auto-rows: 280px;
+      max-width: 420px;
+      margin-inline: auto;
     }
-    .gallery-item.wide { grid-column: span 1; }
     .hero-title {
       font-size: clamp(36px, 12vw, 52px);
       line-height: 1.05;

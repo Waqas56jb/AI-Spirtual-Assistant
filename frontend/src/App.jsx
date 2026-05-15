@@ -5,15 +5,15 @@ import { ChatBubbleContent } from './ChatBubbleContent.jsx';
 import { ChakraSection } from './ChakraSection.jsx';
 import img1 from '../assets/image1.png';
 import img2 from '../assets/image2.png';
-import img3 from '../assets/image3.png';
 import img4 from '../assets/image4.png';
-import img5 from '../assets/image5.png';
-import img7 from '../assets/image7.png';
-import img8 from '../assets/image8.png';
-import img9 from '../assets/image9.png';
-import img10 from '../assets/image10.png';
+import gallArt1 from '../assets/1.jpeg';
+import gallArt2 from '../assets/2.jpeg';
+import gallArt3 from '../assets/3.jpeg';
+import gallArt4 from '../assets/4.jpeg';
+import gallArt11 from '../assets/11.jpeg';
+import gallArt13 from '../assets/13.jpeg';
 import aboutSectionPhoto from '../assets/12.jpeg';
-import asset14 from '../assets/14.jpeg';
+import showcaseKitImage from '../assets/showcase.jpeg';
 import michaelImg from '../assets/Michael.jpeg';
 import gabrielImg from '../assets/Gabriel.jpeg';
 import raphaelImg from '../assets/Raphael.jpeg';
@@ -129,7 +129,7 @@ function getAngelicNumberOfDay(d = new Date()) {
 
 /** Featured kit (visual hero card) and event/service cards in the showcase. */
 const FEATURED_KIT = {
-  image: asset14,
+  image: showcaseKitImage,
   tag: 'Promo in Evidenza',
   title: 'Il Kit di Pronto Soccorso Angelico',
   subtitle: 'La tua guida quotidiana di protezione e trasformazione',
@@ -260,13 +260,14 @@ const FEATURES = [
   },
 ];
 
+/** Arte spirituale — solo JPEG dalla cartella assets (separati da servizi / kit / chi siamo). */
 const GALLERY_ITEMS = [
-  { tall: true, src: img3, alt: 'Galleria — Presenza angelica', label: 'Presenza angelica' },
-  { src: img5, alt: 'Galleria — Luce angelica', label: 'Luce angelica' },
-  { wide: true, src: img7, alt: 'Galleria — Sacro e bellezza', label: 'Sacro e bellezza' },
-  { src: img8, alt: 'Galleria — Presenza celeste', label: 'Presenza celeste' },
-  { src: img9, alt: 'Galleria — Armonia interiore', label: 'Armonia interiore' },
-  { src: img10, alt: 'Galleria — Guida divina', label: 'Guida divina' },
+  { src: gallArt1, alt: 'Galleria — Luminosità angelica', label: 'Luce angelica' },
+  { src: gallArt2, alt: 'Galleria — Presenza celeste', label: 'Presenza celeste' },
+  { src: gallArt3, alt: 'Galleria — Silenzio sacro', label: 'Sacralità interiore' },
+  { src: gallArt4, alt: 'Galleria — Geometria di luce', label: 'Geometria celeste' },
+  { src: gallArt11, alt: 'Galleria — Meditazione e pace', label: "Pace dell'anima" },
+  { src: gallArt13, alt: 'Galleria — Connessione divina', label: 'Connessione divina' },
 ];
 
 const ANGELS = [
@@ -833,11 +834,11 @@ export default function App() {
           <h2 className="section-title">La Bellezza del Mondo Celeste</h2>
           <div className="divider" />
         </div>
-        <div className="gallery-grid reveal reveal-delay-1">
-          {GALLERY_ITEMS.map((g, i) => (
-            <div key={i} className={`gallery-item${g.tall ? ' tall' : ''}${g.wide ? ' wide' : ''}`}>
-              <img src={g.src} alt={g.alt} />
-              <div className="gallery-overlay">
+        <div className="gallery-grid reveal reveal-delay-1" role="list">
+          {GALLERY_ITEMS.map((g) => (
+            <div key={g.alt} className="gallery-item" role="listitem">
+              <img src={g.src} alt={g.alt} loading="lazy" decoding="async" />
+              <div className="gallery-overlay" aria-hidden="true">
                 <span className="gallery-label">{g.label}</span>
               </div>
             </div>
