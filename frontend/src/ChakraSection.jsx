@@ -24,7 +24,7 @@ const CHAKRAS = [
   },
   {
     id: 'manipura',
-    nameIt: 'Maṇipūra',
+    nameIt: 'Manipura',
     nameEn: 'Solar plexus',
     color: '#fbc02d',
     bija: 'RAM (रं)',
