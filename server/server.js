@@ -124,17 +124,32 @@ Square 1:1 composition. Centered subject. High resolution, painterly, awe-inspir
 
 // ============================================================
 //  EMAIL (SMTP via Gmail App Password)
+//  Lazy per-request transporter so newly-added env vars on
+//  Vercel are picked up without a redeploy.
 // ============================================================
-const SMTP_USER          = process.env.SMTP_USER;
-const SMTP_PASS          = process.env.SMTP_PASS;
-const LEAD_NOTIFY_EMAIL  = process.env.LEAD_NOTIFY_EMAIL || SMTP_USER;
+let _cachedTransporter = null;
+let _cachedKey = "";
 
-let mailTransporter = null;
-if (SMTP_USER && SMTP_PASS) {
-  mailTransporter = nodemailer.createTransport({
+function getMailTransporter() {
+  const user = (process.env.SMTP_USER || "").trim();
+  const pass = (process.env.SMTP_PASS || "").trim().replace(/\s+/g, "");
+  if (!user || !pass) return null;
+
+  const key = `${user}:${pass.length}`;
+  if (_cachedTransporter && _cachedKey === key) return _cachedTransporter;
+
+  _cachedTransporter = nodemailer.createTransport({
     service: "gmail",
-    auth: { user: SMTP_USER, pass: SMTP_PASS },
+    auth: { user, pass },
   });
+  _cachedKey = key;
+  return _cachedTransporter;
+}
+
+function getLeadNotifyEmail() {
+  return (
+    (process.env.LEAD_NOTIFY_EMAIL || process.env.SMTP_USER || "").trim()
+  );
 }
 
 function buildLeadEmailHtml({ email, source, when, userAgent, locale }) {
@@ -1037,6 +1052,25 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
 });
 
+// Diagnostics — reveals only WHICH env vars exist (no values).
+app.get("/api/diagnostics", (req, res) => {
+  res.json({
+    status: "ok",
+    env: {
+      OPENAI_API_KEY: !!process.env.OPENAI_API_KEY,
+      GEMINI_API_KEY: !!process.env.GEMINI_API_KEY,
+      SMTP_USER: !!process.env.SMTP_USER,
+      SMTP_USER_value: process.env.SMTP_USER || null,
+      SMTP_PASS: !!process.env.SMTP_PASS,
+      SMTP_PASS_length: (process.env.SMTP_PASS || "").length,
+      LEAD_NOTIFY_EMAIL: !!process.env.LEAD_NOTIFY_EMAIL,
+      LEAD_NOTIFY_EMAIL_value: process.env.LEAD_NOTIFY_EMAIL || null,
+    },
+    transporterReady: !!getMailTransporter(),
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // ============================================================
 //  POST /api/chat — Main chat endpoint
 // ============================================================
@@ -1310,12 +1344,18 @@ app.post("/api/lead", async (req, res) => {
       return res.status(400).json({ error: "Inserisci un indirizzo email valido. 🕊️" });
     }
 
-    if (!mailTransporter) {
-      console.error("❌ SMTP transporter not configured (SMTP_USER/SMTP_PASS missing).");
+    const transporter = getMailTransporter();
+    if (!transporter) {
+      const missing = [];
+      if (!process.env.SMTP_USER) missing.push("SMTP_USER");
+      if (!process.env.SMTP_PASS) missing.push("SMTP_PASS");
+      console.error("❌ SMTP transporter not configured. Missing env:", missing.join(", "));
       return res.status(500).json({
         error: "Servizio email non configurato. Riprova più tardi. 🙏",
+        missing: missing.length ? missing : undefined,
       });
     }
+    const notifyTo = getLeadNotifyEmail();
 
     const userAgent = (req.headers["user-agent"] || "").toString().slice(0, 240);
     const when = new Date().toLocaleString("it-IT", {
@@ -1335,9 +1375,9 @@ app.post("/api/lead", async (req, res) => {
     });
     const textBody = buildLeadEmailText({ email: cleanEmail, when, source: sourceText });
 
-    await mailTransporter.sendMail({
-      from: `"AI ANGEL ✦" <${SMTP_USER}>`,
-      to: LEAD_NOTIFY_EMAIL,
+    await transporter.sendMail({
+      from: `"AI ANGEL ✦" <${process.env.SMTP_USER}>`,
+      to: notifyTo,
       replyTo: cleanEmail,
       subject: `✦ Nuovo contatto AI ANGEL — ${cleanEmail}`,
       text: textBody,
