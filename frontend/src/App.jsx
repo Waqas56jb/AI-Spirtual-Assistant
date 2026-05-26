@@ -186,49 +186,6 @@ const FEATURED_EVENTS = [
   },
 ];
 
-/** Subscription tiers for holistic professionals who want to join AI ANGEL. */
-const PRO_PLANS = [
-  {
-    name: 'Mensile',
-    price: '€29',
-    period: '/ mese',
-    perks: [
-      'Profilo pubblico nella chatbot di AI ANGEL',
-      'Citato dal bot quando rilevante (es. terapie, coaching)',
-      'Link diretto al tuo sito o WhatsApp',
-      'Disdetta in ogni momento',
-    ],
-    badge: '',
-    featured: false,
-  },
-  {
-    name: 'Annuale',
-    price: '€290',
-    period: '/ anno',
-    perks: [
-      'Tutto del piano Mensile',
-      '2 mesi gratuiti rispetto al mensile',
-      'Priorità nelle raccomandazioni del bot',
-      'Banner nella sezione Servizi (a rotazione)',
-    ],
-    badge: 'Più scelto',
-    featured: true,
-  },
-  {
-    name: 'Premium',
-    price: '€590',
-    period: '/ anno',
-    perks: [
-      'Tutto del piano Annuale',
-      'Posizione fissa in homepage',
-      'Card dedicata in sezione Maestri / Coach',
-      'Supporto prioritario e configurazione personalizzata',
-    ],
-    badge: 'Visibilità massima',
-    featured: false,
-  },
-];
-
 const FEATURES = [
   {
     icon: 'fa-dove',
@@ -623,9 +580,6 @@ export default function App() {
         <a href="#services" onClick={closeMobile}>
           Servizi
         </a>
-        <a href="#professionals" onClick={closeMobile}>
-          Professionisti
-        </a>
         <a href="#chakras" onClick={closeMobile}>
           Chakra
         </a>
@@ -668,9 +622,6 @@ export default function App() {
           </li>
           <li>
             <a href="#daily">Messaggio</a>
-          </li>
-          <li>
-            <a href="#professionals">Pro</a>
           </li>
           <li>
             <a href="#cta" className="nav-cta">
@@ -837,17 +788,6 @@ export default function App() {
                   <div className="about-feature-title">Multilingue Globale</div>
                   <div className="about-feature-desc">
                     Risponde in italiano, inglese, spagnolo, francese e oltre 50 lingue. La tua lingua spirituale.
-                  </div>
-                </div>
-              </div>
-              <div className="about-feature">
-                <div className="about-feature-icon">
-                  <i className="fas fa-images" />
-                </div>
-                <div>
-                  <div className="about-feature-title">Immagini Angeliche Generate dall&apos;IA</div>
-                  <div className="about-feature-desc">
-                    Crea bellissime immagini di angeli, mandala e scenari spirituali su richiesta.
                   </div>
                 </div>
               </div>
@@ -1092,54 +1032,6 @@ export default function App() {
         </div>
       </section>
 
-      <section id="professionals">
-        <div className="professionals-header reveal">
-          <div className="section-label" style={{ justifyContent: 'center' }}>Collabora con noi</div>
-          <h2 className="section-title">Sei un Professionista Olistico?</h2>
-          <div className="divider" />
-          <p className="section-desc">
-            Unisciti ad <strong>AI ANGEL</strong>: il chatbot consiglierà i tuoi servizi olistici a migliaia di
-            anime in cerca. Visibilità globale, sottoscrizione mensile o annuale, disdetta in ogni momento.
-          </p>
-        </div>
-        <div className="pro-grid">
-          {PRO_PLANS.map((p, i) => (
-            <div
-              key={p.name}
-              className={`pro-card reveal reveal-delay-${i + 1}${p.featured ? ' pro-card--featured' : ''}`}
-            >
-              {p.badge ? <div className="pro-badge">{p.badge}</div> : null}
-              <h3 className="pro-name">{p.name}</h3>
-              <div className="pro-price">
-                <span className="pro-price-amount">{p.price}</span>
-                <span className="pro-price-period">{p.period}</span>
-              </div>
-              <ul className="pro-perks">
-                {p.perks.map((perk) => (
-                  <li key={perk}>
-                    <i className="fas fa-check" /> {perk}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="https://wa.me/393409271570?text=Salve%2C%20vorrei%20unirmi%20ad%20AI%20ANGEL%20come%20professionista%20olistico."
-                target="_blank"
-                rel="noreferrer"
-                className="pro-cta"
-              >
-                <i className="fab fa-whatsapp" />
-                Candidati ora
-              </a>
-            </div>
-          ))}
-        </div>
-        <p className="pro-note reveal">
-          Per informazioni complete contatta l&apos;Angel Coach al{' '}
-          <a href="tel:+393409271570">+39 340 927 1570</a> o via{' '}
-          <a href="mailto:info@iltuoangelo.it">info@iltuoangelo.it</a>.
-        </p>
-      </section>
-
       <section id="testimonials">
         <div className="testimonials-header reveal">
           <div className="section-label">Testimonianze</div>
@@ -1277,11 +1169,6 @@ export default function App() {
               <li>
                 <a href="#daily">
                   <i className="fas fa-chevron-right" /> Messaggio Giornaliero
-                </a>
-              </li>
-              <li>
-                <a href="#professionals">
-                  <i className="fas fa-chevron-right" /> Collabora con noi
                 </a>
               </li>
             </ul>
