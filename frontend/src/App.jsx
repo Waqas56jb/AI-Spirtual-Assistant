@@ -390,6 +390,7 @@ export default function App() {
   const [showNotif, setShowNotif] = useState(true);
   const [chatInput, setChatInput] = useState('');
   const [ctaEmail, setCtaEmail] = useState('');
+  const [ctaStatus, setCtaStatus] = useState({ state: 'idle', message: '' });
   const [typing, setTyping] = useState(false);
   const [chatMessages, setChatMessages] = useState([
     {
@@ -500,6 +501,49 @@ export default function App() {
     },
     [postUserTurn]
   );
+
+  const submitCtaLead = useCallback(async () => {
+    const email = ctaEmail.trim();
+    if (!email) {
+      setCtaStatus({ state: 'error', message: 'Inserisci la tua email per iniziare il viaggio. 🕊️' });
+      return;
+    }
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    if (!emailOk) {
+      setCtaStatus({ state: 'error', message: 'L\'email non sembra valida. Controlla e riprova.' });
+      return;
+    }
+    setCtaStatus({ state: 'loading', message: 'Invio in corso…' });
+    try {
+      const res = await fetch(`${API_BASE}/api/lead`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          source: 'CTA — Apri le Ali della Tua Anima',
+          locale: typeof navigator !== 'undefined' ? navigator.language : '',
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Impossibile inviare la tua email.');
+      }
+      setCtaStatus({
+        state: 'success',
+        message:
+          data.message ||
+          'Grazie 🕊️ La tua email è stata ricevuta nella luce. Il nostro team angelico ti contatterà entro 24 ore.',
+      });
+      setCtaEmail('');
+    } catch (err) {
+      setCtaStatus({
+        state: 'error',
+        message:
+          (err && err.message) ||
+          'Connessione non riuscita. Riprova tra un momento. 🙏',
+      });
+    }
+  }, [ctaEmail]);
 
   const daily = DAILY_MESSAGES[dailyIdx];
   const angelicNumber = useMemo(() => getAngelicNumberOfDay(), []);
@@ -1063,19 +1107,31 @@ export default function App() {
             Unisciti a migliaia di anime che hanno già iniziato il loro viaggio spirituale con AI ANGEL. Gratuito, per
             sempre.
           </p>
-          <div className="cta-form reveal reveal-delay-2">
+          <form
+            className="cta-form reveal reveal-delay-2"
+            onSubmit={(e) => { e.preventDefault(); submitCtaLead(); }}
+          >
             <input
               type="email"
               className="cta-input"
               placeholder="La tua email spirituale..."
               value={ctaEmail}
               onChange={(e) => setCtaEmail(e.target.value)}
+              disabled={ctaStatus.state === 'loading'}
+              required
             />
-            <button type="button" className="btn-primary">
-              <i className="fas fa-paper-plane" />
-              Inizia
+            <button type="submit" className="btn-primary" disabled={ctaStatus.state === 'loading'}>
+              <i className={`fas ${ctaStatus.state === 'loading' ? 'fa-spinner fa-spin' : 'fa-paper-plane'}`} />
+              {ctaStatus.state === 'loading' ? 'Invio…' : 'Inizia'}
             </button>
-          </div>
+          </form>
+          {ctaStatus.state !== 'idle' && ctaStatus.message ? (
+            <div className={`cta-feedback cta-feedback--${ctaStatus.state}`} role="status">
+              {ctaStatus.state === 'success' ? <i className="fas fa-feather-alt" aria-hidden /> : null}
+              {ctaStatus.state === 'error' ? <i className="fas fa-exclamation-circle" aria-hidden /> : null}
+              <span>{ctaStatus.message}</span>
+            </div>
+          ) : null}
           <p
             style={{ marginTop: 20, fontSize: 13, color: 'rgba(255,255,255,0.62)' }}
             className="reveal reveal-delay-3"

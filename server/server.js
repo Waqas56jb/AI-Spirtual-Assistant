@@ -29,6 +29,7 @@
 const express       = require("express");
 const OpenAI        = require("openai");
 const cors          = require("cors");
+const nodemailer    = require("nodemailer");
 const { v4: uuidv4} = require("uuid");
 require("dotenv").config();
 
@@ -119,6 +120,127 @@ Square 1:1 composition. Centered subject. High resolution, painterly, awe-inspir
   };
   setCachedImage(cacheKey, result);
   return result;
+}
+
+// ============================================================
+//  EMAIL (SMTP via Gmail App Password)
+// ============================================================
+const SMTP_USER          = process.env.SMTP_USER;
+const SMTP_PASS          = process.env.SMTP_PASS;
+const LEAD_NOTIFY_EMAIL  = process.env.LEAD_NOTIFY_EMAIL || SMTP_USER;
+
+let mailTransporter = null;
+if (SMTP_USER && SMTP_PASS) {
+  mailTransporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: { user: SMTP_USER, pass: SMTP_PASS },
+  });
+}
+
+function buildLeadEmailHtml({ email, source, when, userAgent, locale }) {
+  const safe = (s) => String(s || "").replace(/[<>&"]/g, (c) =>
+    ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c])
+  );
+
+  return `<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nuovo contatto AI ANGEL</title>
+</head>
+<body style="margin:0;padding:0;background:#1a0a32;font-family:'Segoe UI',Roboto,Arial,sans-serif;color:#fff;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#1a0a32;padding:32px 12px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;background:linear-gradient(160deg,#2d1548 0%,#3d1b5c 55%,#5a3588 100%);border-radius:24px;overflow:hidden;border:1px solid rgba(228,199,106,0.45);box-shadow:0 24px 60px rgba(0,0,0,0.55);">
+          <!-- Banner -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#c9a84c 0%,#f0d78c 50%,#c9a84c 100%);padding:34px 28px 30px;text-align:center;">
+              <div style="font-size:42px;line-height:1;color:#2d1548;font-weight:900;letter-spacing:6px;font-family:Georgia,'Times New Roman',serif;">✦ AI ANGEL ✦</div>
+              <div style="margin-top:8px;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#3d1b5c;font-weight:700;">Nuovo Contatto Spirituale</div>
+            </td>
+          </tr>
+
+          <!-- Sub-title -->
+          <tr>
+            <td style="padding:30px 32px 8px;text-align:center;">
+              <div style="font-size:24px;color:#f0d78c;font-family:Georgia,serif;font-weight:600;letter-spacing:1px;">Un'anima si è connessa con te 🕊️</div>
+              <div style="margin-top:10px;font-size:15px;color:rgba(255,250,235,0.85);line-height:1.6;">
+                Un nuovo lead ha lasciato la propria email tramite il sito <strong style="color:#fff8e1;">aiangel.it</strong>.<br>
+                Contattalo entro 24&nbsp;ore per offrirgli la luce della tua guida.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Lead email card -->
+          <tr>
+            <td style="padding:24px 32px 8px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:rgba(255,255,255,0.06);border:1px solid rgba(228,199,106,0.4);border-radius:18px;">
+                <tr>
+                  <td style="padding:22px 24px;text-align:center;">
+                    <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#f0d78c;font-weight:700;margin-bottom:10px;">Email del Lead</div>
+                    <a href="mailto:${safe(email)}" style="font-size:22px;color:#ffffff;text-decoration:none;font-weight:700;word-break:break-all;border-bottom:1px dashed rgba(240,215,140,0.6);padding-bottom:4px;">${safe(email)}</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Meta -->
+          <tr>
+            <td style="padding:18px 32px 8px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="font-size:13px;color:rgba(255,250,235,0.85);">
+                <tr><td style="padding:8px 0;border-bottom:1px solid rgba(228,199,106,0.18);"><strong style="color:#f0d78c;">Origine:</strong> ${safe(source || "CTA form — Inizia il Viaggio")}</td></tr>
+                <tr><td style="padding:8px 0;border-bottom:1px solid rgba(228,199,106,0.18);"><strong style="color:#f0d78c;">Data &amp; ora:</strong> ${safe(when)}</td></tr>
+                <tr><td style="padding:8px 0;border-bottom:1px solid rgba(228,199,106,0.18);"><strong style="color:#f0d78c;">Lingua del browser:</strong> ${safe(locale || "—")}</td></tr>
+                <tr><td style="padding:8px 0;"><strong style="color:#f0d78c;">User-Agent:</strong> <span style="color:rgba(255,250,235,0.65);">${safe(userAgent || "—")}</span></td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- CTA buttons -->
+          <tr>
+            <td style="padding:20px 32px 28px;text-align:center;">
+              <a href="mailto:${safe(email)}?subject=Benvenuta%2Fo%20in%20AI%20ANGEL%20%E2%9C%A6&body=Ciao%2C%0A%0Agrazie%20per%20esserti%20connessa%2Fo%20con%20AI%20ANGEL.%20Sono%20Iacopo%2C%20Angel%20Coach%20del%20sito%20iltuoangelo.it..." style="display:inline-block;padding:14px 28px;background:linear-gradient(135deg,#c9a84c,#f0d78c);color:#2d1548;text-decoration:none;border-radius:50px;font-weight:700;letter-spacing:1px;font-size:13px;text-transform:uppercase;box-shadow:0 8px 22px rgba(201,168,76,0.4);">✉ Rispondi al Lead</a>
+              <a href="https://wa.me/393409271570" style="display:inline-block;margin-left:10px;padding:14px 24px;background:#25d366;color:#fff;text-decoration:none;border-radius:50px;font-weight:700;letter-spacing:1px;font-size:13px;text-transform:uppercase;">WhatsApp</a>
+            </td>
+          </tr>
+
+          <!-- Blessing footer -->
+          <tr>
+            <td style="background:rgba(0,0,0,0.25);padding:20px 28px;text-align:center;border-top:1px solid rgba(228,199,106,0.25);">
+              <div style="font-family:Georgia,serif;font-style:italic;color:#f0d78c;font-size:14px;line-height:1.6;">
+                "Gli angeli ti guardano. La luce ti circonda. L'amore ti sostiene."
+              </div>
+              <div style="margin-top:10px;font-size:11px;color:rgba(255,250,235,0.55);letter-spacing:1px;">— AI ANGEL · aiangel.it</div>
+            </td>
+          </tr>
+        </table>
+
+        <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:18px;">
+          Questo è un avviso automatico inviato dal sito AI ANGEL.<br>
+          Per fermare queste notifiche, contatta lo sviluppatore.
+        </div>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
+function buildLeadEmailText({ email, when, source }) {
+  return [
+    "✦ AI ANGEL — Nuovo Contatto Spirituale ✦",
+    "",
+    `Email del lead: ${email}`,
+    `Origine: ${source || "CTA form"}`,
+    `Quando: ${when}`,
+    "",
+    "Contattalo entro 24 ore.",
+    "",
+    "— AI ANGEL · aiangel.it",
+  ].join("\n");
 }
 
 // ============================================================
@@ -1148,6 +1270,90 @@ app.post("/api/meditation", async (req, res) => {
   } catch (error) {
     console.error("❌ Meditation error:", error);
     return res.status(500).json({ error: "Impossibile generare la meditazione. 🙏" });
+  }
+});
+
+// ============================================================
+//  POST /api/lead — Capture email lead + send beautiful email
+// ============================================================
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const leadRateLimit = new Map(); // ip -> timestamp[]
+const LEAD_RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const LEAD_RATE_MAX = 5;
+
+function checkLeadRateLimit(ip) {
+  const now = Date.now();
+  const arr = (leadRateLimit.get(ip) || []).filter((t) => now - t < LEAD_RATE_WINDOW_MS);
+  if (arr.length >= LEAD_RATE_MAX) return false;
+  arr.push(now);
+  leadRateLimit.set(ip, arr);
+  return true;
+}
+
+app.post("/api/lead", async (req, res) => {
+  try {
+    const ip = (req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "unknown")
+      .toString()
+      .split(",")[0]
+      .trim();
+
+    if (!checkLeadRateLimit(ip)) {
+      return res.status(429).json({
+        error: "Troppe richieste da questo dispositivo. Riprova tra un'ora. 🙏",
+      });
+    }
+
+    const { email, source, locale } = req.body || {};
+    const cleanEmail = String(email || "").trim().toLowerCase();
+
+    if (!cleanEmail || !EMAIL_RE.test(cleanEmail) || cleanEmail.length > 200) {
+      return res.status(400).json({ error: "Inserisci un indirizzo email valido. 🕊️" });
+    }
+
+    if (!mailTransporter) {
+      console.error("❌ SMTP transporter not configured (SMTP_USER/SMTP_PASS missing).");
+      return res.status(500).json({
+        error: "Servizio email non configurato. Riprova più tardi. 🙏",
+      });
+    }
+
+    const userAgent = (req.headers["user-agent"] || "").toString().slice(0, 240);
+    const when = new Date().toLocaleString("it-IT", {
+      timeZone: "Europe/Rome",
+      dateStyle: "full",
+      timeStyle: "short",
+    });
+    const sourceText = (source || "CTA form — Inizia il Viaggio").toString().slice(0, 120);
+    const localeText = (locale || req.headers["accept-language"] || "").toString().slice(0, 80);
+
+    const html = buildLeadEmailHtml({
+      email: cleanEmail,
+      source: sourceText,
+      when,
+      userAgent,
+      locale: localeText,
+    });
+    const textBody = buildLeadEmailText({ email: cleanEmail, when, source: sourceText });
+
+    await mailTransporter.sendMail({
+      from: `"AI ANGEL ✦" <${SMTP_USER}>`,
+      to: LEAD_NOTIFY_EMAIL,
+      replyTo: cleanEmail,
+      subject: `✦ Nuovo contatto AI ANGEL — ${cleanEmail}`,
+      text: textBody,
+      html,
+    });
+
+    return res.json({
+      success: true,
+      message:
+        "Grazie 🕊️ La tua email è stata ricevuta nella luce. Il nostro team angelico ti contatterà entro 24 ore.",
+    });
+  } catch (error) {
+    console.error("❌ Lead email error:", error.message || error);
+    return res.status(500).json({
+      error: "Non siamo riusciti a inviare il messaggio. Riprova tra un momento. 🙏",
+    });
   }
 });
 
