@@ -407,18 +407,23 @@
     text-transform: uppercase;
     color: var(--gold-light);
     margin-bottom: 16px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
     text-shadow: 0 1px 4px rgba(45, 21, 72, 0.55);
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
   .section-label::before, .section-label::after {
     content: '';
-    flex: 1;
-    max-width: 40px;
+    width: 40px;
     height: 1px;
     background: var(--gold);
-    opacity: 0.5;
+    opacity: 0.6;
+    flex-shrink: 0;
   }
   .section-title {
     font-family: 'Cinzel Decorative', cursive;
@@ -438,12 +443,20 @@
     color: rgba(255, 250, 235, 0.95);
     line-height: 1.8;
     max-width: 600px;
+    margin: 0 auto;
     font-style: italic;
     text-shadow: 0 1px 6px rgba(45, 21, 72, 0.55);
   }
   .text-center { text-align: center; }
-  .text-center .section-label { justify-content: center; }
-  .text-center .section-desc { margin: 0 auto; }
+  /* About section keeps its left-aligned header layout */
+  #about .section-label {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  #about .section-desc {
+    margin-left: 0;
+    margin-right: 0;
+  }
   .divider {
     width: 80px;
     height: 1px;
