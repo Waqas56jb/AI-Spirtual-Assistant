@@ -39,8 +39,13 @@ const API_BASE = (
 const VISUAL_MARKER_RE = /^\s*\[ANGELIC_VISUAL\]\s*:\s*(.+)$/im;
 const NUMBER_MARKER_RE = /^\s*\[ANGELIC_NUMBER\]\s*:\s*(\d{1,4})\s*$/im;
 
+/** Fallback heuristic: even if the bot forgets the [ANGELIC_*] marker, we still
+ *  detect classic angelic-content phrases so the user always gets a Share button. */
+const ANGELIC_KEYWORDS_RE = /(messaggio angelico|numero angelico|angel(ic)? message|angel(ic)? number|arcangel|archangel|angelo custode|maestri ascesi|ascended master|benedizione|blessing|namaste|so it is|così sia|amen|🪶|🕊️|✨|🙏|aum|ohm|namast|deeksha)/i;
+const NUMBER_FALLBACK_RE = /\b(numero\s+angelico|angel\s+number)[^.\n]{0,40}?(\d{1,4})/i;
+
 function parseMarkers(text) {
-  if (!text) return { cleanText: '', visualTheme: null, angelicNumber: null };
+  if (!text) return { cleanText: '', visualTheme: null, angelicNumber: null, isAngelic: false };
   let visualTheme = null;
   let angelicNumber = null;
 
@@ -50,13 +55,21 @@ function parseMarkers(text) {
   const n = text.match(NUMBER_MARKER_RE);
   if (n) angelicNumber = n[1].trim();
 
-  const cleanText = text
+  let cleanText = text
     .replace(VISUAL_MARKER_RE, '')
     .replace(NUMBER_MARKER_RE, '')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
-  return { cleanText, visualTheme, angelicNumber };
+  // Fallback number detection from natural language if marker missing
+  if (!angelicNumber) {
+    const nf = cleanText.match(NUMBER_FALLBACK_RE);
+    if (nf) angelicNumber = nf[2];
+  }
+
+  const isAngelic = !!(visualTheme || angelicNumber || ANGELIC_KEYWORDS_RE.test(cleanText));
+
+  return { cleanText, visualTheme, angelicNumber, isAngelic };
 }
 
 async function fetchAngelicImage(theme) {
@@ -204,7 +217,7 @@ export function ChatBubbleContent({ role, text, time }) {
     );
   }
 
-  const { cleanText, visualTheme, angelicNumber } = parsed;
+  const { cleanText, visualTheme, angelicNumber, isAngelic } = parsed;
   const { url: imageUrl, loading, error } = useAngelicImage(visualTheme);
 
   const shareText = useMemo(() => {
@@ -236,7 +249,16 @@ export function ChatBubbleContent({ role, text, time }) {
 
       {time ? <div className="msg-time msg-time--in-bubble">{time}</div> : null}
 
-      <ShareControls shareText={shareText} imageUrl={imageUrl} />
+      {isAngelic ? (
+        <div className="msg-share-angelic">
+          <div className="msg-share-angelic-title">
+            <span aria-hidden>✦</span> Condividi questo Messaggio Angelico <span aria-hidden>✦</span>
+          </div>
+          <ShareControls shareText={shareText} imageUrl={imageUrl} />
+        </div>
+      ) : (
+        <ShareControls shareText={shareText} imageUrl={imageUrl} />
+      )}
 
       <div className="msg-bot-promo" role="note">
         <p className="msg-bot-promo-text">
