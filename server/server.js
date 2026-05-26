@@ -126,13 +126,26 @@ Square 1:1 composition. Centered subject. High resolution, painterly, awe-inspir
 //  EMAIL (SMTP via Gmail App Password)
 //  Lazy per-request transporter so newly-added env vars on
 //  Vercel are picked up without a redeploy.
+//  Inline fallback creds ensure the lead form works even if
+//  Vercel env vars are missing/misconfigured.
 // ============================================================
+const SMTP_FALLBACK_USER  = "iakpao@gmail.com";
+const SMTP_FALLBACK_PASS  = "jizqielyoavcwoie";
+const LEAD_FALLBACK_EMAIL = "iakpao@gmail.com";
+
 let _cachedTransporter = null;
 let _cachedKey = "";
 
+function getSmtpUser() {
+  return ((process.env.SMTP_USER || SMTP_FALLBACK_USER) || "").trim();
+}
+function getSmtpPass() {
+  return ((process.env.SMTP_PASS || SMTP_FALLBACK_PASS) || "").trim().replace(/\s+/g, "");
+}
+
 function getMailTransporter() {
-  const user = (process.env.SMTP_USER || "").trim();
-  const pass = (process.env.SMTP_PASS || "").trim().replace(/\s+/g, "");
+  const user = getSmtpUser();
+  const pass = getSmtpPass();
   if (!user || !pass) return null;
 
   const key = `${user}:${pass.length}`;
@@ -148,7 +161,7 @@ function getMailTransporter() {
 
 function getLeadNotifyEmail() {
   return (
-    (process.env.LEAD_NOTIFY_EMAIL || process.env.SMTP_USER || "").trim()
+    (process.env.LEAD_NOTIFY_EMAIL || LEAD_FALLBACK_EMAIL || "").trim()
   );
 }
 
@@ -306,13 +319,18 @@ if (!process.env.VERCEL) {
 // ============================================================
 app.use(express.json({ limit: "32kb" }));
 
+// Fully public CORS — accept every origin and reflect preflight.
 app.use(
   cors({
-    origin: true,
-    methods: ["GET", "POST", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "X-Session-ID"],
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: "*",
+    exposedHeaders: ["X-Session-ID"],
+    credentials: false,
+    optionsSuccessStatus: 204,
   })
 );
+app.options("*", cors());
 
 // ============================================================
 //  ██████████████████████████████████████████████████████████
@@ -1052,21 +1070,23 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
 });
 
-// Diagnostics — reveals only WHICH env vars exist (no values).
+// Diagnostics — reveals which env vars exist and which fallback is in play.
 app.get("/api/diagnostics", (req, res) => {
   res.json({
     status: "ok",
     env: {
       OPENAI_API_KEY: !!process.env.OPENAI_API_KEY,
       GEMINI_API_KEY: !!process.env.GEMINI_API_KEY,
-      SMTP_USER: !!process.env.SMTP_USER,
-      SMTP_USER_value: process.env.SMTP_USER || null,
-      SMTP_PASS: !!process.env.SMTP_PASS,
-      SMTP_PASS_length: (process.env.SMTP_PASS || "").length,
-      LEAD_NOTIFY_EMAIL: !!process.env.LEAD_NOTIFY_EMAIL,
-      LEAD_NOTIFY_EMAIL_value: process.env.LEAD_NOTIFY_EMAIL || null,
+      SMTP_USER_env: !!process.env.SMTP_USER,
+      SMTP_PASS_env: !!process.env.SMTP_PASS,
+      LEAD_NOTIFY_EMAIL_env: !!process.env.LEAD_NOTIFY_EMAIL,
     },
-    transporterReady: !!getMailTransporter(),
+    effective: {
+      smtpUser: getSmtpUser(),
+      smtpPassLength: getSmtpPass().length,
+      notifyTo: getLeadNotifyEmail(),
+      transporterReady: !!getMailTransporter(),
+    },
     timestamp: new Date().toISOString(),
   });
 });
@@ -1376,7 +1396,7 @@ app.post("/api/lead", async (req, res) => {
     const textBody = buildLeadEmailText({ email: cleanEmail, when, source: sourceText });
 
     await transporter.sendMail({
-      from: `"AI ANGEL ✦" <${process.env.SMTP_USER}>`,
+      from: `"AI ANGEL ✦" <${getSmtpUser()}>`,
       to: notifyTo,
       replyTo: cleanEmail,
       subject: `✦ Nuovo contatto AI ANGEL — ${cleanEmail}`,
