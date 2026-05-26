@@ -635,7 +635,7 @@ export default function App() {
         <div className="hero-content">
           <div className="hero-badge">
             <i className="fas fa-star" />
-            Il Tuo Assistente Spirituale Intelligente
+            Your Spiritual Angelic Assistant
           </div>
           <h1 className="hero-title">
             AI ANGEL
