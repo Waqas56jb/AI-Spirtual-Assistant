@@ -235,17 +235,10 @@ const FEATURES = [
     delay: 'reveal-delay-1',
   },
   {
-    icon: 'fa-image',
-    title: 'Genera Immagini con IA',
-    desc: "Crea immagini di angeli, archetipi spirituali e mandala con l'intelligenza artificiale. In fase di sviluppo.",
-    delay: 'reveal-delay-3',
-    wip: true,
-  },
-  {
     icon: 'fa-hashtag',
     title: 'Numeri Angelici',
     desc: 'Sequenze ricorrenti (111, 222, 333, 444…) e Numero Angelico del Giorno: scopri ogni giorno il significato divino del numero che ti guida.',
-    delay: 'reveal-delay-1',
+    delay: 'reveal-delay-3',
   },
 ];
 
