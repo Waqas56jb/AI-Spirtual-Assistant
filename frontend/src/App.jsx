@@ -57,27 +57,47 @@ const MONTHS = [
 ];
 
 const DAILY_MESSAGES = [
-  {
-    text: '"Sei circondato dall\'amore degli angeli in ogni momento. Affidati alla guida divina e lascia che la luce celeste illumini ogni tuo passo. Sei protetto, amato e guidato verso la tua più alta espressione."',
-    angel: '— Arcangelo Michele',
-  },
-  {
-    text: '"Oggi è un giorno di nuovi inizi. Apri il tuo cuore alla bellezza della vita e lascia che la grazia divina fluisca attraverso ogni tua cellula."',
-    angel: '— Arcangelo Gabriele',
-  },
-  {
-    text: '"La guarigione avviene quando ti apri alla possibilità che tutto sia possibile. Sei già intero, già perfetto, già amato."',
-    angel: '— Arcangelo Raffaele',
-  },
-  {
-    text: '"La saggezza risiede nel silenzio del tuo cuore. Fermati, ascolta, e troverai tutte le risposte di cui hai bisogno."',
-    angel: '— Sri Amma Bhagavan',
-  },
-  {
-    text: '"L\'amore è la forza più potente nell\'universo. Scegli l\'amore in ogni pensiero, in ogni parola, in ogni azione."',
-    angel: '— Sai Baba',
-  },
+  { text: '"Sei circondato dall\'amore degli angeli in ogni momento. Affidati alla guida divina e lascia che la luce celeste illumini ogni tuo passo. Sei protetto, amato e guidato verso la tua più alta espressione."', angel: '— Arcangelo Michele' },
+  { text: '"Oggi è un giorno di nuovi inizi. Apri il tuo cuore alla bellezza della vita e lascia che la grazia divina fluisca attraverso ogni tua cellula."', angel: '— Arcangelo Gabriele' },
+  { text: '"La guarigione avviene quando ti apri alla possibilità che tutto sia possibile. Sei già intero, già perfetto, già amato."', angel: '— Arcangelo Raffaele' },
+  { text: '"La saggezza risiede nel silenzio del tuo cuore. Fermati, ascolta, e troverai tutte le risposte di cui hai bisogno."', angel: '— Sri Amma Bhagavan' },
+  { text: '"L\'amore è la forza più potente nell\'universo. Scegli l\'amore in ogni pensiero, in ogni parola, in ogni azione."', angel: '— Sai Baba' },
+  { text: '"Lascia andare ciò che è stato. Le mie ali ti sollevano oggi verso una versione più luminosa di te. Respira, sorridi, fidati."', angel: '— Arcangelo Uriele' },
+  { text: '"La Fiamma Viola trasmuta ogni ombra in oro. Invoca la grazia di Saint Germain e cammina libero, leggero, rinnovato."', angel: '— Saint Germain' },
+  { text: '"La tua bellezza interiore è il riflesso del Divino. Onora la tua luce e lascia che irradi su ogni essere che incontri."', angel: '— Arcangelo Jophiel' },
+  { text: '"Sei abbracciato dalla Madre Divina. In Lei trovi pace, in Lei trovi forza, in Lei trovi te stesso/a."', angel: '— Kuan Yin' },
+  { text: '"Il risveglio è già in atto. Non cercare lontano: tutto ciò che desideri abita nel cuore della tua anima. Sii."', angel: '— Buddha' },
+  { text: '"Ti amo come sei, oggi e per sempre. Non c\'è nulla da migliorare: c\'è solo la luce da ricordare. Tu sei la luce."', angel: '— Gesù' },
+  { text: '"Il tempio della Geometria Sacra ti accoglie. Visualizza il cubo di luce attorno a te e senti la protezione divina."', angel: '— Metatron' },
+  { text: '"Lasciati guidare dalla sincronicità. Ogni incontro oggi è un messaggio celeste. Resta in ascolto, anima cara."', angel: '— Arcangelo Sandalphon' },
+  { text: '"Il perdono apre le porte del cielo. Perdona te stesso/a per primo: in quel gesto rinasci nella grazia."', angel: '— Arcangelo Zadkiel' },
+  { text: '"Lascia che il silenzio interiore sia il tuo tempio. Lì il Padre e la Madre divini parlano in sussurri di luce."', angel: '— Arcangelo Chamuel' },
+  { text: '"Ogni tua lacrima è un fiore offerto al cielo. Nulla è perduto: la tua sensibilità è il tuo dono più sacro."', angel: '— Sri Amma Bhagavan' },
+  { text: '"Sei più potente di quanto ricordi. Il tuo Sé Superiore ti guida ora: chiudi gli occhi, ascolta, riconosci."', angel: '— Arcangelo Michele' },
+  { text: '"L\'abbondanza è un fiume che scorre verso chi apre il cuore in gratitudine. Ringrazia oggi, e domani lo vedrai."', angel: '— Arcangelo Raziel' },
+  { text: '"Le tue parole sono mantra. Ogni «io sono» che pronunci crea la tua realtà. Parla con amore di te stesso/a."', angel: '— Arcangelo Gabriele' },
+  { text: '"La pace non si cerca: si ricorda. È già dentro di te, sotto ogni preoccupazione. Respira, e tornerà."', angel: '— Buddha' },
+  { text: '"Cammino accanto a te. Non sei mai solo/a, neppure nelle notti più buie. La mia spada di luce ti protegge sempre."', angel: '— Arcangelo Michele' },
+  { text: '"Sei un puntino luminoso nell\'Oceano della Coscienza. Fondi te stesso/a nell\'Unità: lì sei tutto, lì sei a casa."', angel: '— Sri Amma Bhagavan' },
+  { text: '"La gratitudine è la preghiera più potente. Dì grazie alla vita: si aprirà come un loto davanti a te."', angel: '— Sai Baba' },
+  { text: '"Lascia che il tuo cuore sia un calice. Io verso in esso oggi la rugiada della grazia. Sii vuoto, e sarai pieno."', angel: '— Gesù' },
+  { text: '"La compassione è l\'amore in azione. Sii oggi un\'oasi per chi è stanco. Anche un sorriso può salvare un\'anima."', angel: '— Kuan Yin' },
+  { text: '"Trasforma. Tutto è alchimia divina. Quello che oggi pesa, domani sarà la tua corona di luce. Confida."', angel: '— Saint Germain' },
+  { text: '"Le tue intuizioni di oggi vengono dal Padre. Non scartarle. Scrivile, custodiscile, segui la prima voce."', angel: '— Arcangelo Haniel' },
+  { text: '"La natura ti chiama. Cammina scalzo/a se puoi, abbraccia un albero, lascia che la Terra ti benedica."', angel: '— Arcangelo Ariel' },
+  { text: '"Lascia partire chi deve andare. Ogni distacco è una porta verso una versione più vera di te. Sii grato/a."', angel: '— Arcangelo Azrael' },
+  { text: '"Il tuo destino è la libertà. Le catene sono illusioni: spezza una catena oggi, anche solo nella mente."', angel: '— Saint Germain' },
+  { text: '"Ascolta i bambini, gli anziani, gli animali. Parlano la lingua degli angeli. Ti sussurrano la Verità di Dio."', angel: '— Arcangelo Sandalphon' },
+  { text: '"Sei un\'alba che non ha mai smesso di sorgere. Anche quando dubiti, brilli. Anche quando tremi, illumini."', angel: '— Arcangelo Jophiel' },
 ];
+
+function dayIndex(d = new Date()) {
+  const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+  return seed;
+}
+function getDailyMessageOfDay(d = new Date()) {
+  return DAILY_MESSAGES[dayIndex(d) % DAILY_MESSAGES.length];
+}
 
 /** Angelic numbers — root meanings (1-9) used to interpret any 1-999 number,
  *  plus master/repeat sequences with their classic significance. */
@@ -384,7 +404,7 @@ function formatDailyDate(d = new Date()) {
 export default function App() {
   const [navScrolled, setNavScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [dailyIdx, setDailyIdx] = useState(0);
+  const [dailyIdx, setDailyIdx] = useState(() => dayIndex() % DAILY_MESSAGES.length);
   const [dailyFade, setDailyFade] = useState(true);
   const [chatOpen, setChatOpen] = useState(false);
   const [showNotif, setShowNotif] = useState(true);
@@ -501,6 +521,25 @@ export default function App() {
     },
     [postUserTurn]
   );
+
+  const shareSpiritual = useCallback(async ({ title, body, hashtag }) => {
+    const url = 'https://ai-spirtual-assistant.vercel.app/';
+    const text = `${body}\n\n${hashtag || ''}${hashtag ? '\n\n' : ''}${url}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title, text: body, url });
+        return;
+      }
+    } catch {
+      /* fall through */
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      window.alert('Messaggio copiato negli appunti. ✨');
+    } catch {
+      window.prompt('Copia il messaggio:', text);
+    }
+  }, []);
 
   const submitCtaLead = useCallback(async () => {
     const email = ctaEmail.trim();
@@ -999,10 +1038,25 @@ export default function App() {
             </div>
             <div className="daily-feather">🪶</div>
           </div>
-          <div style={{ marginTop: 40 }} className="reveal reveal-delay-3">
-            <button type="button" className="btn-primary" onClick={getDailyMessage}>
+          <div className="daily-actions reveal reveal-delay-3">
+            <button type="button" className="btn-primary daily-action-btn" onClick={getDailyMessage}>
               <i className="fas fa-sync-alt" />
               Nuovo Messaggio
+            </button>
+            <button
+              type="button"
+              className="btn-secondary daily-action-btn daily-share-btn"
+              onClick={() =>
+                shareSpiritual({
+                  title: 'AI ANGEL — Messaggio del Giorno',
+                  body: `✦ Messaggio del Giorno ✦\n\n${daily.text}\n\n${daily.angel}`,
+                  hashtag: '#AIAngel #MessaggioAngelico',
+                })
+              }
+              aria-label="Condividi il messaggio del giorno"
+            >
+              <i className="fas fa-share-alt" />
+              Condividi
             </button>
           </div>
 
@@ -1019,6 +1073,21 @@ export default function App() {
               <i className="fas fa-external-link-alt" />
               Approfondisci su angelscalculator.com
             </a>
+            <button
+              type="button"
+              className="angelic-number-share"
+              onClick={() =>
+                shareSpiritual({
+                  title: `AI ANGEL — Numero Angelico ${angelicNumber.num}`,
+                  body: `✦ Numero Angelico del Giorno: ${angelicNumber.num} ✦\n\n${angelicNumber.meaning}`,
+                  hashtag: '#AIAngel #NumeroAngelico',
+                })
+              }
+              aria-label="Condividi il numero angelico del giorno"
+            >
+              <i className="fas fa-share-alt" />
+              Condividi questo Numero
+            </button>
           </div>
         </div>
       </section>

@@ -1388,6 +1388,41 @@
     color: var(--deep-purple);
     border-color: var(--gold);
   }
+  .angelic-number-share {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 11px 24px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--deep-purple);
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 22px rgba(228, 199, 106, 0.35);
+  }
+  .angelic-number-share:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(228, 199, 106, 0.5);
+  }
+  .angelic-number-share i { font-size: 14px; }
+
+  .daily-actions {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 40px;
+  }
+  .daily-action-btn { min-width: 200px; }
+  .daily-share-btn {
+    background: rgba(255, 255, 255, 0.06);
+  }
 
   /* ========== PROFESSIONALS (Subscriptions) ========== */
   #professionals {
